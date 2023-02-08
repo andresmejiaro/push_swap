@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 16:39:34 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/08 15:59:33 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/08 17:01:41 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 #include "push_swap.h"
 
 #include "game_global_manip.c"
-#include 
+#include "game_movements.c"
+#include "list_game_node_fcts.c"
 
 int main(int argc, char **argv)
 {
-	int 	aux;
-	t_list	*data;
+	int 		aux;
+	t_game_node	*data;
 
 	if (argc <= 1)
 		return (0);
@@ -39,42 +40,33 @@ int main(int argc, char **argv)
 	return (0);
 }
 
-int read_and_validate_input(int argc, char **argv, t_list **data)
+int read_and_validate_input(int argc, char **argv, t_game_node **data)
 {
-	int	*node_c;
+	int	node_c;
 	int	counter;
 
 	if (check_valid(argc,argv) != 0)
 		return (1);
 	counter = 1;
-	node_c = ft_calloc(1,sizeof(int));
-	if (node_c == 0)
-		return (1);
-	*node_c = ft_atoi(argv[counter]);
-	*data = ft_lstnew(node_c);
+	node_c = ft_atoi(argv[counter]);
+	*data = ft_lstgn_new(node_c);
 	while (counter++ < argc - 1)
 	{
-		node_c = ft_calloc(1, sizeof(int));
-		if (node_c == 0)
-		{
-			ft_lstclear(data,free);
-			return (1);
-		}
-		*node_c = ft_atoi(argv[counter]);
-		ft_lstadd_back(data, ft_lstnew(node_c));
+		node_c = ft_atoi(argv[counter]);
+		ft_lstgn_add_back(data, ft_lstgn_new(node_c));
 	}
 	return (0);
 }
 
-int check_uniqueness(t_list *data)
+int check_uniqueness(t_game_node *data)
 {
-	t_list	*dataprt;
+	t_game_node	*dataprt;
 
 	dataprt = data->next;
 	while (1)
 	{
 		if ( data != 0 & dataprt != 0)
-			if (*(int *)(data->content) == *(int *)(dataprt->content))
+			if (data->content == dataprt->content)
 				return (1);
 		if (data->next == 0)
 			break ;

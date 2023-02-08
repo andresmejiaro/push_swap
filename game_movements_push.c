@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_global_manip.c                                :+:      :+:    :+:   */
+/*   game_movements_push.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/08 17:56:31 by amejia           ###   ########.fr       */
+/*   Created: 2023/02/08 17:50:43 by amejia            #+#    #+#             */
+/*   Updated: 2023/02/08 18:01:15 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "push_swap.h"
 
-void	game_start(t_game_node *data)
+oid pb(t_game *game)
 {
-	t_game	*game;
+    t_game_node *first;
+    
 
-	game = malloc(sizeof(t_game));
-	game->stack_a = data;
-	game->stack_b = 0;
-	print_game_state(game);
-	sa(game);
-	print_game_state(game);
+    first = game->stack_a;
+
+    game -> stack_a = game->stack_a->next;
+    ft_lstgn_add_front(&(game->stack_b),first);
+    
 }
 
-void print_one(int content)
+void pa(t_game *game)
 {
-	ft_printf("%i,",content);
-}
-
-void print_game_state(t_game *game)
-{
-	ft_lstgn_iter(game->stack_a, print_one);
-	ft_printf("\n");
-	ft_lstgn_iter(game->stack_b, print_one);
-	ft_printf("\n");
+    t_game_node *first;
+    
+    first = game->stack_b;
+    game -> stack_b = game->stack_b->next;
+    ft_lstgn_add_front(&(game->stack_a),first);
 }
