@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/08 17:56:31 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/09 16:14:21 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,15 @@ void	game_start(t_game_node *data)
 	game->stack_a = data;
 	game->stack_b = 0;
 	print_game_state(game);
-	sa(game);
+	pb(game);
+	pb(game);
+	pb(game);
+	print_game_state(game);
+	ra(game);
+	rb(game);
+	print_game_state(game);
+	rra(game);
+	rrb(game);
 	print_game_state(game);
 }
 

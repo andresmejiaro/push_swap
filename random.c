@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_movements_push.c                              :+:      :+:    :+:   */
+/*   random.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 17:50:43 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/08 23:10:48 by amejia           ###   ########.fr       */
+/*   Created: 2023/02/09 16:40:27 by amejia            #+#    #+#             */
+/*   Updated: 2023/02/09 17:40:26 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "push_swap.h"
 
-void pb(t_game *game)
+int random_uint(unsigned int range)
 {
-	t_game_node *first;
+    static int seed;   
+    long a;
+    long m;
+    
+    if (seed == 0)
+        seed = SEED_N;
 
-	first = game->stack_a;
-	game -> stack_a = game->stack_a->next;
-	ft_lstgn_add_front(&(game->stack_b),first);  
-}
-
-void pa(t_game *game)
-{
-	t_game_node *first;
-	
-	first = game->stack_b;
-	game -> stack_b = game->stack_b->next;
-	ft_lstgn_add_front(&(game->stack_a),first);
+    a = 16807;
+    m = 2147483647;
+    seed = (a * seed) % m;
+    range = seed % range;
+    return (range);
+    
 }
