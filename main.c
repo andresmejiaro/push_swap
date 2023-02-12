@@ -6,20 +6,25 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 16:39:34 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/09 17:42:06 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/12 11:27:22 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "push_swap.h"
 
+#include "list_game_node_fcts2.c"
 #include "random.c"
 #include "game_global_manip.c"
+#include "game_global_manip2.c"
 #include "game_movements_push.c"
 #include "game_movements_rotate.c"
 #include "game_movements_reverse_rotate.c"
 #include "game_movements_swap.c"
 #include "list_game_node_fcts.c"
+#include "quicksort.c"
+#include "movement_orchestrator.c"
+#include "sort.c"
 
 int main(int argc, char **argv)
 {
@@ -111,6 +116,3 @@ int	check_valid(int argc, char **argv)
 	}
 	return (0);
 }
-
-
-

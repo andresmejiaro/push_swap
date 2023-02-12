@@ -1,45 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_movements_swap.c                              :+:      :+:    :+:   */
+/*   list_game_node_fcts2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 15:43:35 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/11 18:44:12 by amejia           ###   ########.fr       */
+/*   Created: 2023/02/10 03:16:05 by amejia            #+#    #+#             */
+/*   Updated: 2023/02/12 11:19:01 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "push_swap.h"
 
-t_game_node	*swap(t_game_node *first)
+int ft_lstgn_value(t_game_node *node, int position)
 {
-	t_game_node	*second;
-
-	if (first == 0)
-		return (first);
-	second = first->next;
-	if (second == 0)
-		return (first);
-	first ->next = second -> next;
-	second->next = first;
-	return second;
+	int tmp;
+	while (node->next != 0 && position > 0)
+	{
+		node = node-> next;
+		position--;
+	}
+	if (position != 0)
+		return (0);
+	tmp = node->content;
+	return (tmp);
 }
 
-void sa(t_game *game)
+int	ft_lstgn_size(t_game_node *node)
 {
-    game->stack_a = swap(game ->stack_a);
+	int	counter;
+
+	if (node == NULL)
+		return (0);
+	counter = 1;
+	while (node->next != NULL)
+	{
+		if (node->next != NULL)
+			node = node-> next;
+		counter++;
+	}
+	return (counter);
 }
 
-void	sb(t_game *game)
-{
-	game->stack_b = swap(game ->stack_b);
-}
-
-void	ss(t_game *game)
-{
-	sa(game);
-	sb(game);
-	return ;
-}

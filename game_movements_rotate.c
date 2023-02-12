@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 23:12:51 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/09 17:21:40 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/12 03:16:27 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,23 @@
 void	rotate(t_game_node **first)
 {
 	t_game_node	*last;
+	t_game_node *second;
 	t_game_node *before;
 
 	if (*first == 0)
 		return ;
 	if ((*first)->next == 0)
 		return ;
+	second = (*first)->next;
 	last = *first;
 	while (last->next != 0)
 	{
 		before = last;
 		last = last -> next;
 	}
-	before->next = 0;
 	last->next = (*first);
-	*first = last;
+	last->next->next=0;
+	*first = second;
 	return ;
 }
 
