@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:54:32 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/12 11:19:34 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/12 12:14:12 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void movement_orchestrator(t_game *game,char *mv)
 	else
 		return ; 
 	ft_printf("%s\n", mv);
-	print_game_state(game);
+	//print_game_state(game);
 }
 
 void	movement_translator(t_game *game, t_game_node *stack, char *mv)
