@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:07:51 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/12 09:24:06 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/12 16:08:07 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	reverse_rotate(t_game_node **first)
 {
 	t_game_node	*separate;
-	t_game_node *before_last;
-	
+	t_game_node	*before_last;
+
 	if (*first == 0)
 		return ;
 	if ((*first)->next == 0)
 		return ;
 	separate = *first;
-	while(separate->next != 0)
+	while (separate->next != 0)
 	{
 		before_last = separate;
-		separate=separate->next;
+		separate = separate->next;
 	}
 	before_last->next = 0;
 	ft_lstgn_add_front(first, separate);

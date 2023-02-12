@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 16:39:34 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/12 11:27:22 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/12 19:09:59 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@
 #include "quicksort.c"
 #include "movement_orchestrator.c"
 #include "sort.c"
+#include "ft_abs.c"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int 		aux;
+	int			aux;
 	t_game_node	*data;
 
 	if (argc <= 1)
@@ -49,12 +50,12 @@ int main(int argc, char **argv)
 	return (0);
 }
 
-int read_and_validate_input(int argc, char **argv, t_game_node **data)
+int	read_and_validate_input(int argc, char **argv, t_game_node **data)
 {
 	int	node_c;
 	int	counter;
 
-	if (check_valid(argc,argv) != 0)
+	if (check_valid(argc, argv) != 0)
 		return (1);
 	counter = 1;
 	node_c = ft_atoi(argv[counter]);
@@ -67,14 +68,14 @@ int read_and_validate_input(int argc, char **argv, t_game_node **data)
 	return (0);
 }
 
-int check_uniqueness(t_game_node *data)
+int	check_uniqueness(t_game_node *data)
 {
 	t_game_node	*dataprt;
 
 	dataprt = data->next;
 	while (1)
 	{
-		if ( data != 0 & dataprt != 0)
+		if (data != 0 & dataprt != 0)
 			if (data->content == dataprt->content)
 				return (1);
 		if (data->next == 0)

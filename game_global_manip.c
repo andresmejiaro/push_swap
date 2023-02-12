@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/12 12:17:31 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/12 16:21:53 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,32 @@ void	game_start(t_game_node *data)
 	game = malloc(sizeof(t_game));
 	game->stack_a = data;
 	game->stack_b = 0;
-	params=sort_params('a',0,ft_lstgn_size(game->stack_a)-1,1);
+	ref_to_game(game);
+	params = sort_params('a', 0, ft_lstgn_size(game->stack_a) - 1, 1);
 	sort(game, params);
 	free(params);
-	//print_game_state(game);
+	print_game_state(game);
 }
 
-void print_one(int content)
+void	print_one(int content)
 {
-	ft_printf("%i,",content);
+	ft_printf("%i,", content);
 }
 
-void print_game_state(t_game *game)
+void	print_game_state(t_game *game)
 {
 	ft_lstgn_iter(game->stack_a, print_one);
 	ft_printf("\n");
 	ft_lstgn_iter(game->stack_b, print_one);
 	ft_printf("\n");
+}
+
+t_game	*ref_to_game(t_game *game)
+{
+	static t_game	*svgame;
+
+	if (game == 0)
+		return (svgame);
+	svgame = game;
+	return (game);
 }

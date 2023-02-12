@@ -6,15 +6,16 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 03:16:05 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/12 11:19:01 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/12 16:10:35 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int ft_lstgn_value(t_game_node *node, int position)
+int	ft_lstgn_value(t_game_node *node, int position)
 {
-	int tmp;
+	int	tmp;
+
 	while (node->next != 0 && position > 0)
 	{
 		node = node-> next;
@@ -41,4 +42,3 @@ int	ft_lstgn_size(t_game_node *node)
 	}
 	return (counter);
 }
-

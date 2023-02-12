@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:43:35 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/11 18:44:12 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/12 16:09:15 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ t_game_node	*swap(t_game_node *first)
 		return (first);
 	first ->next = second -> next;
 	second->next = first;
-	return second;
+	return (second);
 }
 
-void sa(t_game *game)
+void	sa(t_game *game)
 {
-    game->stack_a = swap(game ->stack_a);
+	game->stack_a = swap(game ->stack_a);
 }
 
 void	sb(t_game *game)

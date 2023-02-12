@@ -1,59 +1,63 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_global_manip2.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 15:34:35 by amejia            #+#    #+#             */
+/*   Updated: 2023/02/12 17:08:49 by amejia           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 t_game_node	*stack_from_char(t_game *game, char c)
 {
 	if (c == 'a')
 		return (game->stack_a);
 	if (c == 'b')
 		return (game->stack_b);
-	return(0);
+	return (0);
 }
 
-char lane_swich(char c)
+char	lane_swich(char c)
 {
 	if (c == 'a')
 		return ('b');
 	if (c == 'b')
 		return ('a');
+	return ('\0');
 }
+
 void	find_value(t_game *game, t_game_node *stack, int value)
 {
-	int         counter[2];
+	int			counter[2];
 	t_game_node	*middle;
 
 	middle = stack;
 	counter[0] = 0;
 	counter[1] = 0;
-	// while (middle->content != value && middle->next != 0)
-	// {
-	// 	counter[0]++;
-	// 	middle = middle->next;
-	// }
-	// while (middle->next != 0 )
-	// {
-	// 	counter[1]++;
-	// 	middle = middle->next;
-	// }
-    while (middle->next != 0)
+	while (middle->next != 0)
 	{
-		if (middle->content == value || counter[1] >0)
-            counter[1]++;
-        else
-            counter[0]++;
+		if (middle->content == value || counter[1] > 0)
+			counter[1]++;
+		else
+			counter[0]++;
 		middle = middle->next;
 	}
-    counter[1]++;
+	counter[1]++;
 	if (counter[1] == 0)
 		return ;
 	if (counter[0] < counter[1])
 		while (counter[0]-- > 0)
-			movement_translator(game, stack, "r");
+			mv_trans(game, stack, "r");
 	else
 		while (counter[1]-- > 0)
-			movement_translator(game, stack, "rr");
+			mv_trans(game, stack, "rr");
 }
 
 void	find_position(t_game *game, t_game_node *stack, int position)
 {
-	int 		counter;
+	int			counter;
 	t_game_node	*middle;
 
 	middle = stack;
@@ -71,8 +75,8 @@ void	find_position(t_game *game, t_game_node *stack, int position)
 	}
 	if (position < counter)
 		while (position-- > 0)
-			movement_translator(game, stack, "r");
+			mv_trans(game, stack, "r");
 	else
 		while (counter-- > 0)
-			movement_translator(game, stack, "rr");
+			mv_trans(game, stack, "rr");
 }

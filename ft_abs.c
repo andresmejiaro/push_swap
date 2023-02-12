@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   random.c                                           :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:40:27 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/12 16:38:52 by amejia           ###   ########.fr       */
+/*   Created: 2023/02/12 19:08:23 by amejia            #+#    #+#             */
+/*   Updated: 2023/02/12 19:09:09 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-int	random_uint(unsigned int range)
+int ft_abs(int x)
 {
-	static int	seed;
-	long		a;
-	long		m;
-
-	if (seed == 0)
-		seed = SEED_N;
-	a = 16807;
-	m = 2147483647;
-	seed = (a * seed) % m;
-	range = seed % range;
-	return (range);
+    if (x < 0)
+        return(-x);
+    return (x);
 }

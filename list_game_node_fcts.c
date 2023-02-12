@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:47:07 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/10 03:15:12 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/12 16:09:49 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	ft_lstgn_add_front(t_game_node **lst, t_game_node *new)
 	*lst = new;
 }
 
-int ft_lstgn_len(t_game_node *node)
+int	ft_lstgn_len(t_game_node *node)
 {
-	int counter;
+	int	counter;
 
 	if (node == 0)
 		return (0);
