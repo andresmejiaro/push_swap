@@ -6,11 +6,12 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:47:07 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/12 16:09:49 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/14 14:35:02 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft/libft.h"
 
 t_game_node	*ft_lstgn_new(int content)
 {

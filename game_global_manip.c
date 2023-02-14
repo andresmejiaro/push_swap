@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/12 16:21:53 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/14 17:03:12 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	game_start(t_game_node *data)
 	params = sort_params('a', 0, ft_lstgn_size(game->stack_a) - 1, 1);
 	sort(game, params);
 	free(params);
-	print_game_state(game);
+	if (DEBUG ==1)
+		print_game_state(game);
 }
 
 void	print_one(int content)
@@ -49,4 +50,27 @@ t_game	*ref_to_game(t_game *game)
 		return (svgame);
 	svgame = game;
 	return (game);
+}
+
+long	*node_to_list(t_game *game, t_sort_params *sortp)
+{
+	size_t 		elements; 
+	long		*to_return;
+	size_t		counter;
+	t_game_node *node;
+
+	elements = sortp->end - sortp->start + 1;
+	to_return = (long *)ft_calloc(elements, sizeof(long));
+	counter = sortp ->start;
+	node = stack_from_char(game, sortp->cstack);
+	while (counter-- > 0)
+		node = node->next;
+	counter = 0;
+	while (counter < elements)
+	{
+		*(to_return+counter) = node->content;
+		node = node->next;
+		counter++;
+	}
+	return (to_return);
 }

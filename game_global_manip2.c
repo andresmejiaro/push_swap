@@ -6,9 +6,12 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 15:34:35 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/12 17:08:49 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/14 14:37:14 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "push_swap.h"
+#include "libft/libft.h"
 
 t_game_node	*stack_from_char(t_game *game, char c)
 {

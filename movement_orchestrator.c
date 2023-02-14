@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:54:32 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/12 16:43:05 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/14 16:50:22 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ void	movement_orchestrator(t_game *game, char *mv)
 	else
 		return ;
 	ft_printf("%s\n", mv);
+	if (DEBUG)
+		print_game_state(game);
 }
 
 void	mv_trans(t_game *game, t_game_node *stack, char *mv)
 {
-	char	cstack[2];
+	char	cstack[3];
 	char	temp[10];
 
 	ft_strlcpy(temp, mv, 3);
@@ -54,7 +56,7 @@ void	mv_trans(t_game *game, t_game_node *stack, char *mv)
 		ft_strlcpy(cstack, "ba", 3);
 	if (!ft_strncmp(temp, "p", 2))
 		ft_strlcat(temp, &cstack[1], 3);
-	if (!ft_strncmp(temp, "r", 2) || !ft_strncmp(temp, "s", 2))
+	if (!ft_strncmp(temp, "r", 2))
 		ft_strlcat(temp, &cstack[0], 3);
 	if (!ft_strncmp(temp, "u", 2))
 	{
@@ -63,5 +65,7 @@ void	mv_trans(t_game *game, t_game_node *stack, char *mv)
 	}
 	if (!ft_strncmp(temp, "rr", 3))
 		ft_strlcat(temp, &cstack[0], 4);
+	if (!ft_strncmp(temp,"r2",3))
+		ft_strlcpy(temp,"rr",3);
 	movement_orchestrator(game, temp);
 }

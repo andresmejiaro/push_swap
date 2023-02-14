@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 19:33:38 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/12 16:43:20 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/14 16:54:27 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,22 @@ void	sort(t_game *game, t_sort_params *sortp)
 	int		elements;
 
 	elements = sortp->end - sortp->start + 1;
-	if (elements <= 1)
+	if (ft_abs(elements) <= 1)
 		return ;
 	method = sort_chooser(game, sortp);
 	if (!ft_strncmp(method, "qs", -1))
 		ft_qsort(game, sortp);
+	if (!ft_strncmp(method, "season", -1))
+		seasonssort(game, sortp);
 }
 
 char	*sort_chooser(t_game *game, t_sort_params *sortp)
 {
-	return ("qs");
+
+	if (game ->stack_a != 0)
+		return ("season");
+	else if(sortp->cstack != 'z')
+		return ("season");
+	else
+		return ("season");	
 }

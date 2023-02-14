@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:54:00 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/12 19:13:56 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/14 17:04:29 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 # ifndef SEED_N
 #  define SEED_N 658457
 # endif
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
+# include "libft/libft.h"
 
 typedef struct s_game_node
 {
@@ -49,14 +53,19 @@ int				check_uniqueness(t_game_node *data);
 int				check_valid(int argc, char **argv);
 void			game_start(t_game_node *data);
 void			sa(t_game *game);
+void			sb(t_game *game);
+void			ss(t_game *game);
 void			print_game_state(t_game *game);
 void			print_one(int content);
+void			pa(t_game *game);
 void			pb(t_game *game);
 void			rotate(t_game_node **first);
 void			ra(t_game *game);
 void			rb(t_game *game);
+void			rr(t_game *game);
 void			rra(t_game *game);
 void			rrb(t_game *game);
+void			rrr(t_game *game);
 void			ft_qsort(t_game *game, t_sort_params *sortp);
 void			movement_orchestrator(t_game *game, char *mv);
 void			mv_trans(t_game *game, t_game_node *stack, char *mv);
@@ -72,6 +81,11 @@ void			qsort_push(t_game *game, t_sort_params *sortp, int pivot, \
 void			call_sort(char cstack, int start, int end, int ascending);
 t_game			*ref_to_game(t_game *game);
 int 			ft_abs(int x);
-int				pivot_sampler(t_game *game, t_sort_params *sortp);
+int				ft_lstgn_size(t_game_node *node);
+void 			seasonssort(t_game *game, t_sort_params *sortp);
+long 			*list_quantiles_long(long *list, size_t len);
+long			*node_to_list(t_game *game, t_sort_params *sortp);
+
+
 
 #endif
