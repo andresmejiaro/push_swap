@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/14 22:14:26 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/15 02:15:34 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/15 03:11:00 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	l_check(t_game *game,t_sort_params *sortp, char this,long value)
 		if (stack_from_char(game, sortp->cstack) == 0)
 			return (9);
 		else if (sortp->ascending * \
-				stack_from_char(game, sortp->cstack)->content <= \
+				stack_from_char(game, sortp->cstack)->content < \
 				sortp->ascending * value)
 			return (1);
 	}
@@ -32,7 +32,7 @@ int	l_check(t_game *game,t_sort_params *sortp, char this,long value)
 		if (stack_from_char(game, lane_swich(sortp->cstack)) == 0)
 			return (9);
 		else if (sortp->ascending * \
-				stack_from_char(game, lane_swich(sortp->cstack))->content <= \
+				stack_from_char(game, lane_swich(sortp->cstack))->content < \
 				sortp->ascending * value)
 			return (1);
 	}
@@ -48,7 +48,7 @@ int	m_check(t_game *game,t_sort_params *sortp, char this,long value)
 		if (stack_from_char(game, sortp->cstack) == 0)
 			return (9);
 		else if (sortp->ascending * \
-				stack_from_char(game, sortp->cstack)->content >= \
+				stack_from_char(game, sortp->cstack)->content > \
 				sortp->ascending * value)
 			return (1);
 	}
@@ -57,10 +57,20 @@ int	m_check(t_game *game,t_sort_params *sortp, char this,long value)
 		if (stack_from_char(game, lane_swich(sortp->cstack)) == 0)
 			return (0);
 		else if (sortp->ascending * \
-				stack_from_char(game, lane_swich(sortp->cstack))->content >= \
+				stack_from_char(game, lane_swich(sortp->cstack))->content > \
 				sortp->ascending * value)
 			return (1);
 	}
 	return (0);
 }
 
+int size_c(t_game *game, t_sort_params *sortp, char this)
+{
+	int r;
+	r = 0;
+	if (this == 't')
+		r=ft_lstgn_size(stack_from_char(game, sortp->cstack));
+	if (this == 'o')
+		r=ft_lstgn_size(stack_from_char(game, lane_swich(sortp->cstack)));
+	return (r);
+}

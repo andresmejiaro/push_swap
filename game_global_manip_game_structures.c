@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_global_manip.c                                :+:      :+:    :+:   */
+/*   game_global_manip_game_structures.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/14 17:03:12 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/15 05:59:16 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	game_start(t_game_node *data)
 	params = sort_params('a', 0, ft_lstgn_size(game->stack_a) - 1, 1);
 	sort(game, params);
 	free(params);
+	//ft_lstgn_clear(game->stack_a);
+	//ft_lstgn_clear(game->stack_b);
+	free(game);
 	if (DEBUG ==1)
 		print_game_state(game);
 }

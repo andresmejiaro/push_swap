@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:54:00 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/14 23:58:31 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/15 03:08:18 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,8 @@ long			*node_to_list(t_game *game, t_sort_params *sortp);
 int				l_check(t_game *gam, t_sort_params *sortp, char this, long val);
 int				m_check(t_game *gam, t_sort_params *sortp, char this, long val);
 long			*count_quantiles_long(long *list, size_t len);
+void	mv_trans_c(t_game *game, t_sort_params *sortp, char this, char *mv);
+int size_c(t_game *game, t_sort_params *sortp, char this);
+
 
 #endif

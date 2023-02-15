@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:54:32 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/14 16:50:22 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/15 05:59:59 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,24 @@ void	mv_trans(t_game *game, t_game_node *stack, char *mv)
 	if (!ft_strncmp(temp,"r2",3))
 		ft_strlcpy(temp,"rr",3);
 	movement_orchestrator(game, temp);
+}
+
+void	mv_trans_c(t_game *game, t_sort_params *sortp, char this, char *mv)
+{
+	if (this == 't')
+		mv_trans(game, stack_from_char(game, sortp->cstack), mv);
+	if (this == 'o')
+		mv_trans(game, stack_from_char(game, lane_swich(sortp->cstack)), mv);
+}
+
+long	value_c(t_game *game, t_sort_params *sortp, char this)
+{
+	long	r;
+
+	r = 0;
+	if (this == 't' && size_c(game, sortp, 't') > 0)
+		r = stack_from_char(game, sortp->cstack)->content;
+	if (this == 'o' && size_c(game, sortp, 'o') > 0)
+		r = stack_from_char(game, lane_swich(sortp->cstack))->content;
+	return (r);
 }

@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 18:29:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/15 02:20:18 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/15 06:24:43 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,56 +39,82 @@ void	section_count(long **qcount, t_sort_params *sortp)
 
 void	seasons_forwardpass(t_game *game, t_sort_params *sortp)
 {
-	int		elements;
 	long	*el_list;
 	long	*qcount;
 	long	*qu;
-
-	elements = sortp->end - sortp->start + 1;
+	long		count_push;
+	long		count_swicho;
+	long	check_t;
+	long	check_o;
+	long	value_t;
+	long 	value_o;
+	
 	el_list = node_to_list(game, sortp);
-	qu = list_quantiles_long(el_list, elements);
-	qcount = count_quantiles_long(el_list, elements);
+	qu = list_quantiles_long(el_list, sortp->end - sortp->start + 1);
+	qcount = count_quantiles_long(el_list, sortp->end - sortp->start + 1);
 	section_count(&qcount, sortp);
-	free(el_list);
-	qu[0] = (1 + sortp->ascending) / 2 * qu[0] - \
-		(sortp->ascending - 1) * qu[3];
-	while ((qcount[0] > 0) || (qcount[1] > 0) || (qcount[3] > 0))
+	qu[0] = (1 + sortp->ascending) / 2 * qu[0] - (sortp->ascending - 1) * qu[3];
+	
+	count_push = qcount[0]+qcount[1];
+	count_swicho = qcount[1];
+	
+	check_o = 0;
+	check_t = check_o;
+	
+	while (1)
 	{
 		if (!l_check(game, sortp, 't', qu[1]) && \
-			m_check(game, sortp, 'o', qu[0]))
+			!l_check(game, sortp, 'o', qu[0]))
 		{
-			mv_trans(game,stack_from_char(game, sortp->cstack), "r2");
-			qcount[2]--;
-			qcount[1]--;
+			if(check_o == 0)
+			{
+				value_o = stack_from_char(game,sortp->cstack)->content;
+				check_o++;
+			}
+			if(check_t ==0)
+			{
+				value_t = stack_from_char(game,sortp->cstack)->content;
+				check_t++;
+			}
+			mv_trans_c(game,sortp,'t',"r2");
+			count_swicho--;
 		}
-		else if (m_check(game,sortp,'o',qu[0]) && size_o(game)))
+		else if (m_check(game,sortp,'o',qu[0]) && size_c(game,sortp,'o') > 1)
 		{
-			mv_trans(game, stack_from_char(game, lane_swich(sortp->cstack)), "r");
-			qcount[1]--;
+			mv_trans_c(game, sortp, 'o', "r");
+			if(check_o == 0)
+			{
+				value_o = stack_from_char(game,sortp->cstack)->content;
+				check_o++;
+			}
+			count_swicho--;
 		}
 		else if (l_check(game, sortp, 't', qu[1]))
-			mv_trans(game,stack_from_char(game, sortp->cstack), "p");
-		else if (!l_check(game, sortp, 't', qu[1]))
 		{
-			mv_trans(game,stack_from_char(game, sortp->cstack), "r");
-			qcount[2]--;
+			mv_trans_c(game, sortp, 't', "p");
+			count_push--;
 		}
-		else if ((qcount[2] > 0) && (qcount[3] >0))
+		else if (!l_check(game, sortp, 't', qu[1]) && count_push > 0)
 		{
-			mv_trans(game,stack_from_char(game, sortp->cstack), "r2");
-			qcount[2]--;
-			qcount[0]--;
-		}			
-		else if((qcount[2] > 0))
-		{
-			mv_trans(game,stack_from_char(game, sortp->cstack), "r");
-			qcount[2]--;
-		}	
-		else if(qcount[0] >0)
-		{
-			mv_trans(game, stack_from_char(game, lane_swich(sortp->cstack)), "r");
-		}	
+			mv_trans_c(game, sortp, 't', "r");
+			if(check_t ==0)
+			{
+				value_t = stack_from_char(game,sortp->cstack)->content;
+				check_t++;
+			}
+		}
+		else
+			break;	
 	}
+	free(el_list);
+	free(qu);
+	free(qcount);
+	find_value(game, stack_from_char(game, sortp->cstack), value_t);
+	find_value(game, stack_from_char(game, lane_swich(sortp->cstack)), value_o);
+	ft_qsort(game,sort_params(sortp->cstack,0,sortp->end - sortp->start - qcount[0]-qcount[1],sortp->ascending));
+	ft_qsort(game,sort_params(lane_swich(sortp->cstack),0, qcount[0]+qcount[1],-sortp->ascending));
+	
+
 }
 
 
