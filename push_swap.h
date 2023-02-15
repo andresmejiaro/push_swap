@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:54:00 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/14 17:04:29 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/14 23:58:31 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,13 @@ void			qsort_push(t_game *game, t_sort_params *sortp, int pivot, \
 					int *npushed);
 void			call_sort(char cstack, int start, int end, int ascending);
 t_game			*ref_to_game(t_game *game);
-int 			ft_abs(int x);
+int				ft_abs(int x);
 int				ft_lstgn_size(t_game_node *node);
-void 			seasonssort(t_game *game, t_sort_params *sortp);
-long 			*list_quantiles_long(long *list, size_t len);
+void			seasonssort(t_game *game, t_sort_params *sortp);
+long			*list_quantiles_long(long *list, size_t len);
 long			*node_to_list(t_game *game, t_sort_params *sortp);
-
-
+int				l_check(t_game *gam, t_sort_params *sortp, char this, long val);
+int				m_check(t_game *gam, t_sort_params *sortp, char this, long val);
+long			*count_quantiles_long(long *list, size_t len);
 
 #endif

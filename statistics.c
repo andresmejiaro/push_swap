@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:40:27 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/13 17:44:02 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/15 02:03:03 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,31 @@ long *list_quantiles_long(long *list, size_t len)
 	return(result);
 }
 
+//this mallocs the result
+// Counts the results up to the each quartile (not including except for the 
+// last one)
+long	*count_quantiles_long(long *list, size_t len)
+{
+	long	*result;
+	long	*result_count;
 
+	result = (long *)ft_calloc(3, sizeof(long));
+	list_qsort(list, len);
+	result[0] = list[len/4];
+	result[1] = list[len/2];
+	result[2] = list[(3*len)/4];
+	result_count = (long *)ft_calloc(4,sizeof(size_t));
+	while (len-- > 0)
+	{
+		if (list[len]>=result[2])
+			result_count[3]++;
+		else if (list[len]>=result[1])
+			result_count[2]++;
+		else if (list[len]>=result[0])
+			result_count[1]++;
+		else
+			result_count[0]++;
+	}
+	free(result);
+	return (result_count);
+}
