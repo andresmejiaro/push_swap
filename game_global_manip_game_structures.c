@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/15 05:59:16 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/16 19:19:05 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ void	game_start(t_game_node *data)
 	game = malloc(sizeof(t_game));
 	game->stack_a = data;
 	game->stack_b = 0;
-	ref_to_game(game);
 	params = sort_params('a', 0, ft_lstgn_size(game->stack_a) - 1, 1);
-	sort(game, params);
-	free(params);
-	//ft_lstgn_clear(game->stack_a);
-	//ft_lstgn_clear(game->stack_b);
-	free(game);
+	params->game = game;
+	fill_order(params);
+	sort_quicksort(params);
 	if (DEBUG ==1)
 		print_game_state(game);
+	free(params);
+	ft_lstgn_clear(game->stack_a);
+	ft_lstgn_clear(game->stack_b);
+	free(game);
 }
 
 void	print_one(int content)
@@ -45,35 +46,45 @@ void	print_game_state(t_game *game)
 	ft_printf("\n");
 }
 
-t_game	*ref_to_game(t_game *game)
+t_game_node	*get_node(t_sort_params *sortp, char stack, int position)
 {
-	static t_game	*svgame;
+	t_game_node	*node;
+	int			stack_len;
 
-	if (game == 0)
-		return (svgame);
-	svgame = game;
-	return (game);
+	if (stack == 't')
+		stack = sortp ->cstack;
+	else if (stack == 'o' && sortp->cstack == 'a')
+		stack = 'b';
+	else if (stack == 'o' && sortp->cstack == 'b')
+		stack = 'a';
+	else if (!(stack == 'a') || !(stack == 'b'))
+		return (0);
+	if (stack == 'a')
+		node = sortp->game->stack_a;
+	if (stack == 'b')
+		node = sortp->game->stack_b;
+	stack_len = ft_lstgn_size(node);
+	if (stack_len == 0)
+		return 0;
+	while (position < 0)
+		position += stack_len;
+	position = position % stack_len;
+	node = ft_lstgn_nnode(node, position);
+	return (node);
 }
 
-long	*node_to_list(t_game *game, t_sort_params *sortp)
+// This functions mallocs the result;
+long	*list_from_params(t_sort_params *sortp)
 {
-	size_t 		elements; 
-	long		*to_return;
-	size_t		counter;
-	t_game_node *node;
+	int		counter;
+	long 	*to_return;
 
-	elements = sortp->end - sortp->start + 1;
-	to_return = (long *)ft_calloc(elements, sizeof(long));
-	counter = sortp ->start;
-	node = stack_from_char(game, sortp->cstack);
-	while (counter-- > 0)
-		node = node->next;
 	counter = 0;
-	while (counter < elements)
+	to_return = (long *)ft_calloc(sortp->elements, sizeof(long));
+	while (counter <= sortp->elements)
 	{
-		*(to_return+counter) = node->content;
-		node = node->next;
+		to_return[counter] = get_node(sortp, 't', sortp->start + counter)->content;
 		counter++;
 	}
-	return (to_return);
+	return(to_return);
 }

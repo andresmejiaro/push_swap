@@ -6,13 +6,14 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 19:33:38 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/14 16:54:27 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/16 19:40:27 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
 
+// this mallocs the result
 t_sort_params	*sort_params(char cstack, int start, int end, int ascending)
 {
 	t_sort_params	*params;
@@ -20,44 +21,27 @@ t_sort_params	*sort_params(char cstack, int start, int end, int ascending)
 	params = (t_sort_params *)ft_calloc(1, sizeof(t_sort_params));
 	params->ascending = ascending;
 	params->cstack = cstack;
-	params->start = start;
-	params->end = end;
+	if (start < end)
+	{
+		params->start = start;
+		params->end = end;
+	}
+	else
+	{
+		params->end = start;
+		params->start = end;
+	}
+	params->elements = params->end - params->start + 1;
 	return (params);
 }
 
-void	call_sort(char cstack, int start, int end, int ascending)
+int	l_comparison(t_sort_params *sortp, char stack,long value)
 {
-	t_sort_params	*params;
-	t_game			*game;
-
-	game = ref_to_game(NULL);
-	params = sort_params(cstack, start, end, ascending);
-	sort(game, params);
-	free(params);
+	if (get_node(sortp, stack, 0) == 0)
+		return (0);
+	if (sortp->ascending * get_node(sortp, stack, 0)->content < \
+		sortp->ascending * value)
+		return (1);
+	return (0);
 }
 
-void	sort(t_game *game, t_sort_params *sortp)
-{
-	char	*method;
-	int		elements;
-
-	elements = sortp->end - sortp->start + 1;
-	if (ft_abs(elements) <= 1)
-		return ;
-	method = sort_chooser(game, sortp);
-	if (!ft_strncmp(method, "qs", -1))
-		ft_qsort(game, sortp);
-	if (!ft_strncmp(method, "season", -1))
-		seasonssort(game, sortp);
-}
-
-char	*sort_chooser(t_game *game, t_sort_params *sortp)
-{
-
-	if (game ->stack_a != 0)
-		return ("season");
-	else if(sortp->cstack != 'z')
-		return ("season");
-	else
-		return ("season");	
-}

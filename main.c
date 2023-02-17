@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 16:39:34 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/14 14:35:34 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/17 03:00:55 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	game_start(data);
+	if (DEBUG == 1)
+		system("leaks push_swap");
 	return (0);
 }
 
@@ -90,8 +92,11 @@ int	check_valid(int argc, char **argv)
 		signs = 0;
 		while (argv[counter][i] != '\0')
 		{
-			if (argv[counter][i++] == '+' || argv[counter][i] == '-')
+			if (argv[counter][i] == '+' || argv[counter][i] == '-')
+				{
 				signs ++;
+				i++;
+				}
 			else if (argv[counter][i] == ' ' || argv[counter][i] <= '9' \
 				|| argv[counter][i] >= '0')
 				i++;

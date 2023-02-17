@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:54:00 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/15 03:08:18 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/17 01:21:51 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 typedef struct s_game_node
 {
 	int					content;
-	char				*sort_id;
+	int					ordered_position;
 	struct s_game_node	*next;
 }	t_game_node;
 
@@ -35,8 +35,10 @@ typedef struct s_game
 
 typedef struct s_sort_params
 {
+	t_game 	*game;
 	int		start;
 	int		end;
+	int		elements;
 	int		ascending;
 	char	cstack;
 }	t_sort_params;
@@ -46,50 +48,41 @@ void			ft_lstgn_add_back(t_game_node **lst, t_game_node *new);
 void			ft_lstgn_iter(t_game_node *lst, void (*f)(int));
 void			ft_lstgn_add_front(t_game_node **lst, t_game_node *new);
 int				ft_lstgn_value(t_game_node *node, int position);
-int				random_uint(unsigned int range);
+t_game_node		*ft_lstgn_nnode(t_game_node *node, int position);
+int				ft_lstgn_size(t_game_node *node);
+void			ft_lstgn_clear(t_game_node *node);
 int				read_and_validate_input(int argc, char **argv, \
 					t_game_node **data);
 int				check_uniqueness(t_game_node *data);
 int				check_valid(int argc, char **argv);
 void			game_start(t_game_node *data);
+void			print_one(int content);
+void			print_game_state(t_game *game);
 void			sa(t_game *game);
 void			sb(t_game *game);
 void			ss(t_game *game);
-void			print_game_state(t_game *game);
-void			print_one(int content);
 void			pa(t_game *game);
 void			pb(t_game *game);
-void			rotate(t_game_node **first);
 void			ra(t_game *game);
 void			rb(t_game *game);
 void			rr(t_game *game);
 void			rra(t_game *game);
 void			rrb(t_game *game);
 void			rrr(t_game *game);
-void			ft_qsort(t_game *game, t_sort_params *sortp);
 void			movement_orchestrator(t_game *game, char *mv);
-void			mv_trans(t_game *game, t_game_node *stack, char *mv);
-void			find_value(t_game *game, t_game_node *stack, int value);
-void			find_position(t_game *game, t_game_node *stack, int position);
-char			*sort_chooser(t_game *game, t_sort_params *sortp);
-void			sort(t_game *game, t_sort_params *sortp);
-t_game_node		*stack_from_char(t_game *game, char c);
 t_sort_params	*sort_params(char cstack, int start, int end, int ascending);
-char			lane_swich(char c);
-void			qsort_push(t_game *game, t_sort_params *sortp, int pivot, \
-					int *npushed);
-void			call_sort(char cstack, int start, int end, int ascending);
-t_game			*ref_to_game(t_game *game);
-int				ft_abs(int x);
-int				ft_lstgn_size(t_game_node *node);
-void			seasonssort(t_game *game, t_sort_params *sortp);
 long			*list_quantiles_long(long *list, size_t len);
+void			list_qsort(long *list, size_t len);
 long			*node_to_list(t_game *game, t_sort_params *sortp);
-int				l_check(t_game *gam, t_sort_params *sortp, char this, long val);
-int				m_check(t_game *gam, t_sort_params *sortp, char this, long val);
 long			*count_quantiles_long(long *list, size_t len);
-void	mv_trans_c(t_game *game, t_sort_params *sortp, char this, char *mv);
-int size_c(t_game *game, t_sort_params *sortp, char this);
+void			fill_order(t_sort_params *sortp);
+t_game_node 	*get_node(t_sort_params *sortp, char stack, int position);
+long			*list_from_params(t_sort_params *sortp);
+void			sort_quicksort(t_sort_params *sortp);
+void			movement(t_sort_params *sortp, char stack, char *mv);
+int				l_comparison(t_sort_params *sortp, char stack, long value);
+char			lane_swich(char c);
+void			move_to(t_sort_params *sortp, char this, int position);
 
 
 #endif
