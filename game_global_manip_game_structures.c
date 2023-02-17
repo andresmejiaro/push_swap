@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/17 05:16:12 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/17 11:51:55 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,23 @@ long	*list_from_params(t_sort_params *sortp)
 	while (counter < sortp->elements)
 	{
 		to_return[counter] = get_node(sortp, 't', sortp->start + counter)->content;
+		counter++;
+	}
+	return(to_return);
+}
+
+
+// This functions mallocs the result;
+long	*list_from_paramso(t_sort_params *sortp)
+{
+	int		counter;
+	long 	*to_return;
+
+	counter = 0;
+	to_return = (long *)ft_calloc(sortp->elements, sizeof(long));
+	while (counter < sortp->elements)
+	{
+		to_return[counter] = get_node(sortp, 't', sortp->start + counter)->ordered_position;
 		counter++;
 	}
 	return(to_return);

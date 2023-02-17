@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:54:00 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/17 01:21:51 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/17 09:04:14 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ void			movement(t_sort_params *sortp, char stack, char *mv);
 int				l_comparison(t_sort_params *sortp, char stack, long value);
 char			lane_swich(char c);
 void			move_to(t_sort_params *sortp, char this, int position);
+void			sort_insertionsort(t_sort_params *sortp);
+void 			sort_radix(t_sort_params *sortp);
+long			*list_from_paramso(t_sort_params *sortp);
+int 			find_value(t_sort_params *sortp, char this, long value);
 
 
 #endif
