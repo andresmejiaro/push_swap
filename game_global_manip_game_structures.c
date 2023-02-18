@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/17 11:51:55 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/18 00:48:29 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	game_start(t_game_node *data)
 	params = sort_params('a', 0, ft_lstgn_size(game->stack_a) - 1, 1);
 	params->game = game;
 	fill_order(params);
-	sort_quicksort(params);
-	if (DEBUG ==1)
+	sort_radix(params);
+	if (DEBUG == 1)
 		print_game_state(game);
 	free(params);
 	ft_lstgn_clear(game->stack_a);
@@ -65,7 +65,7 @@ t_game_node	*get_node(t_sort_params *sortp, char stack, int position)
 		node = sortp->game->stack_b;
 	stack_len = ft_lstgn_size(node);
 	if (stack_len == 0)
-		return 0;
+		return (0);
 	while (position < 0)
 		position += stack_len;
 	position = position % stack_len;
@@ -77,31 +77,15 @@ t_game_node	*get_node(t_sort_params *sortp, char stack, int position)
 long	*list_from_params(t_sort_params *sortp)
 {
 	int		counter;
-	long 	*to_return;
+	long	*to_return;
 
 	counter = 0;
 	to_return = (long *)ft_calloc(sortp->elements, sizeof(long));
 	while (counter < sortp->elements)
 	{
-		to_return[counter] = get_node(sortp, 't', sortp->start + counter)->content;
+		to_return[counter] = get_node(sortp, 't', \
+			sortp->start + counter)->content;
 		counter++;
 	}
-	return(to_return);
-}
-
-
-// This functions mallocs the result;
-long	*list_from_paramso(t_sort_params *sortp)
-{
-	int		counter;
-	long 	*to_return;
-
-	counter = 0;
-	to_return = (long *)ft_calloc(sortp->elements, sizeof(long));
-	while (counter < sortp->elements)
-	{
-		to_return[counter] = get_node(sortp, 't', sortp->start + counter)->ordered_position;
-		counter++;
-	}
-	return(to_return);
+	return (to_return);
 }

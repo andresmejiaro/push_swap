@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 19:33:38 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/17 05:14:22 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/18 02:31:11 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_sort_params	*sort_params(char cstack, int start, int end, int ascending)
 	return (params);
 }
 
-int	l_comparison(t_sort_params *sortp, char stack,long value)
+int	l_comparison(t_sort_params *sortp, char stack, long value)
 {
 	if (get_node(sortp, stack, 0) == 0)
 		return (0);
@@ -44,4 +44,3 @@ int	l_comparison(t_sort_params *sortp, char stack,long value)
 		return (1);
 	return (0);
 }
-

@@ -6,16 +6,12 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:40:27 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/15 02:03:03 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/18 02:52:41 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
-
-#include "libft/ft_calloc.c"
-#include "libft/ft_bzero.c"
-#include "libft/ft_memset.c"
 
 int	random_uint(unsigned int range)
 {
@@ -36,9 +32,8 @@ int	random_uint(unsigned int range)
 void	list_qsort(long *list, size_t len)
 {
 	size_t	head;
-	long	aux;
-	size_t  orlen;
-	
+	size_t	orlen;
+
 	if (len <= 1)
 		return ;
 	orlen = len;
@@ -48,35 +43,31 @@ void	list_qsort(long *list, size_t len)
 	{
 		if (list[len] < list[0])
 		{
-			aux = list[len];
-			list[len] = list[head];
-			list[head] = aux;
+			ft_value_swap_l(list + len, list + head);
 			head++;
 		}
 		else
 			len--;
 	}
-	while(list[head] > list[0])
+	while (list[head] > list[0])
 		head--;
-	aux = list[0];
-	list[0] = list[head];
-	list[head] = aux;
-	list_qsort(list,head);
+	ft_value_swap_l(list, list + head);
+	list_qsort(list, head);
 	list_qsort(list + head + 1, orlen - head - 1);
 }
 
 //this modifies the original list
 //this mallocs the result
-long *list_quantiles_long(long *list, size_t len)
+long	*list_quantiles_long(long *list, size_t len)
 {
-	long *result;
-	
-	result =(long *)ft_calloc(3, sizeof(long));
+	long	*result;
+
+	result = (long *)ft_calloc(3, sizeof(long));
 	list_qsort(list, len);
-	result[0] = list[len/4];
-	result[1] = list[len/2];
-	result[2] = list[(3*len)/4];
-	return(result);
+	result[0] = list[len / 4];
+	result[1] = list[len / 2];
+	result[2] = list[(3 * len) / 4];
+	return (result);
 }
 
 //this mallocs the result
@@ -89,17 +80,17 @@ long	*count_quantiles_long(long *list, size_t len)
 
 	result = (long *)ft_calloc(3, sizeof(long));
 	list_qsort(list, len);
-	result[0] = list[len/4];
-	result[1] = list[len/2];
-	result[2] = list[(3*len)/4];
-	result_count = (long *)ft_calloc(4,sizeof(size_t));
+	result[0] = list[len / 4];
+	result[1] = list[len / 2];
+	result[2] = list[(3 * len) / 4];
+	result_count = (long *)ft_calloc(4, sizeof(size_t));
 	while (len-- > 0)
 	{
-		if (list[len]>=result[2])
+		if (list[len] >= result[2])
 			result_count[3]++;
-		else if (list[len]>=result[1])
+		else if (list[len] >= result[1])
 			result_count[2]++;
-		else if (list[len]>=result[0])
+		else if (list[len] >= result[0])
 			result_count[1]++;
 		else
 			result_count[0]++;

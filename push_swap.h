@@ -6,11 +6,12 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:54:00 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/17 09:04:14 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/18 02:52:58 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
+# include "libft/libft.h"
 # define PUSH_SWAP_H
 # ifndef SEED_N
 #  define SEED_N 658457
@@ -18,7 +19,6 @@
 # ifndef DEBUG
 #  define DEBUG 0
 # endif
-# include "libft/libft.h"
 
 typedef struct s_game_node
 {
@@ -35,7 +35,7 @@ typedef struct s_game
 
 typedef struct s_sort_params
 {
-	t_game 	*game;
+	t_game	*game;
 	int		start;
 	int		end;
 	int		elements;
@@ -44,9 +44,12 @@ typedef struct s_sort_params
 }	t_sort_params;
 
 t_game_node		*ft_lstgn_new(int content);
-void			ft_lstgn_add_back(t_game_node **lst, t_game_node *new);
-void			ft_lstgn_iter(t_game_node *lst, void (*f)(int));
-void			ft_lstgn_add_front(t_game_node **lst, t_game_node *new);
+void			ft_lstgn_add_back(t_game_node **lst, \
+				t_game_node *new);
+void			ft_lstgn_iter(t_game_node *lst, \
+					void (*f)(int));
+void			ft_lstgn_add_front(t_game_node **lst, \
+					t_game_node *new);
 int				ft_lstgn_value(t_game_node *node, int position);
 t_game_node		*ft_lstgn_nnode(t_game_node *node, int position);
 int				ft_lstgn_size(t_game_node *node);
@@ -58,6 +61,21 @@ int				check_valid(int argc, char **argv);
 void			game_start(t_game_node *data);
 void			print_one(int content);
 void			print_game_state(t_game *game);
+char			lane_swich(char c);
+t_sort_params	*sort_params(char cstack, int start, int end, \
+				int ascending);
+long			*node_to_list(t_game *game, t_sort_params *sortp);
+long			*list_from_params(t_sort_params *sortp);
+long			*list_from_paramso(t_sort_params *sortp);
+void			fill_order(t_sort_params *sortp);
+t_game_node		*get_node(t_sort_params *sortp, char stack, \
+				int position);
+void			movement_orchestrator(t_game *game, char *mv);
+void			movement(t_sort_params *sortp, char stack, char *mv);
+void			move_to(t_sort_params *sortp, char this, \
+					int position);
+int				find_value(t_sort_params *sortp, char this, \
+					long value);
 void			sa(t_game *game);
 void			sb(t_game *game);
 void			ss(t_game *game);
@@ -69,24 +87,14 @@ void			rr(t_game *game);
 void			rra(t_game *game);
 void			rrb(t_game *game);
 void			rrr(t_game *game);
-void			movement_orchestrator(t_game *game, char *mv);
-t_sort_params	*sort_params(char cstack, int start, int end, int ascending);
+int				l_comparison(t_sort_params *sortp, char stack, \
+					long value);
 long			*list_quantiles_long(long *list, size_t len);
 void			list_qsort(long *list, size_t len);
-long			*node_to_list(t_game *game, t_sort_params *sortp);
 long			*count_quantiles_long(long *list, size_t len);
-void			fill_order(t_sort_params *sortp);
-t_game_node 	*get_node(t_sort_params *sortp, char stack, int position);
-long			*list_from_params(t_sort_params *sortp);
+void			sort_quicksort_align(t_sort_params *sortp);
 void			sort_quicksort(t_sort_params *sortp);
-void			movement(t_sort_params *sortp, char stack, char *mv);
-int				l_comparison(t_sort_params *sortp, char stack, long value);
-char			lane_swich(char c);
-void			move_to(t_sort_params *sortp, char this, int position);
 void			sort_insertionsort(t_sort_params *sortp);
-void 			sort_radix(t_sort_params *sortp);
-long			*list_from_paramso(t_sort_params *sortp);
-int 			find_value(t_sort_params *sortp, char this, long value);
-
+void			sort_radix(t_sort_params *sortp);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 16:39:34 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/17 03:00:55 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/18 00:42:16 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	check_uniqueness(t_game_node *data)
 	dataprt = data->next;
 	while (1)
 	{
-		if (data != 0 & dataprt != 0)
+		if (data != 0 && dataprt != 0)
 			if (data->content == dataprt->content)
 				return (1);
 		if (data->next == 0)
@@ -81,25 +81,24 @@ int	check_uniqueness(t_game_node *data)
 
 int	check_valid(int argc, char **argv)
 {
-	int	i;
-	int	counter;
+	int	cnt[2];
 	int	signs;
 
-	counter = 0;
-	while (counter ++ < argc -1)
+	cnt[0] = 0;
+	while (cnt[0]++ < argc -1)
 	{
-		i = 0;
+		cnt[1] = 0;
 		signs = 0;
-		while (argv[counter][i] != '\0')
+		while (argv[cnt[0]][cnt[1]] != '\0')
 		{
-			if (argv[counter][i] == '+' || argv[counter][i] == '-')
-				{
+			if (argv[cnt[0]][cnt[1]] == '+' || argv[cnt[0]][cnt[1]] == '-')
+			{
 				signs ++;
-				i++;
-				}
-			else if (argv[counter][i] == ' ' || argv[counter][i] <= '9' \
-				|| argv[counter][i] >= '0')
-				i++;
+				cnt[1]++;
+			}
+			else if (argv[cnt[0]][cnt[1]] == ' ' || argv[cnt[0]][cnt[1]] <= '9' \
+				|| argv[cnt[0]][cnt[1]] >= '0')
+				cnt[1]++;
 			else
 				return (1);
 		}

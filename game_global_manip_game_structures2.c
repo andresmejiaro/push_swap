@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/17 01:20:21 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/18 00:32:36 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	fill_order(t_sort_params *sortp)
 			if (get_node(sortp, 't', counter)->content \
 				== elementlist[counter2])
 			{
-				get_node(sortp, 't',counter)->\
+				get_node(sortp, 't', counter)->\
 					ordered_position = counter2 + 1;
 				break ;
 			}
@@ -50,37 +50,52 @@ char	lane_swich(char c)
 	if (c == 't')
 		return ('o');
 	if (c == 'o')
-		return('t');
+		return ('t');
 	return ('\0');
 }
 
 void	move_to(t_sort_params *sortp, char this, int position)
 {
-	t_game_node *node[2];
-	int			counter[2]; 
-	
+	t_game_node	*node[2];
+	int			counter[2];
+
 	counter[0] = 0;
 	counter[1] = 0;
 	node[0] = get_node(sortp, this, 0);
-	if(node[0] == 0)
+	if (node[0] == 0)
 		return ;
 	node[1] = get_node(sortp, this, position);
-	while(node[0] != node[1])
+	while (node[0] != node[1])
 	{
 		counter[0]++;
 		node[0] = node[0]->next;
 	}
-	while(node[0] != 0)
+	while (node[0] != 0)
 	{
 		counter[1]++;
 		node[0] = node[0]->next;
 	}
 	if (counter[0] < counter[1])
-		while(counter[0]-- > 0)
+		while (counter[0]-- > 0)
 			movement(sortp, this, "r");
 	else
-		while(counter[1]-- > 0)
+		while (counter[1]-- > 0)
 			movement(sortp, this, "rr");
 }
 
+// This functions mallocs the result;
+long	*list_from_paramso(t_sort_params *sortp)
+{
+	int		counter;
+	long	*to_return;
 
+	counter = 0;
+	to_return = (long *)ft_calloc(sortp->elements, sizeof(long));
+	while (counter < sortp->elements)
+	{
+		to_return[counter] = get_node(sortp, 't', \
+			sortp->start + counter)->ordered_position;
+		counter++;
+	}
+	return (to_return);
+}

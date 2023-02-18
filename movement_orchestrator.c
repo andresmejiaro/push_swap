@@ -6,12 +6,19 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:54:32 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/16 23:48:23 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/18 01:35:02 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "libft/libft.h"
+
+void	move_orchestrator_print(t_game *game, char *mv)
+{
+	ft_printf("%s\n", mv);
+	if (DEBUG)
+		print_game_state(game);
+}
 
 void	movement_orchestrator(t_game *game, char *mv)
 {
@@ -39,47 +46,33 @@ void	movement_orchestrator(t_game *game, char *mv)
 		rrr(game);
 	else
 		return ;
-	ft_printf("%s\n", mv);
-	if (DEBUG)
-		print_game_state(game);
+	move_orchestrator_print(game, mv);
 }
 
-void movement(t_sort_params *sortp, char stack, char *mv)
+void	movement(t_sort_params *sortp, char stack, char *mv)
 {
 	char		temp[10];
 
 	ft_strlcpy(temp, mv, 3);
 	if (stack == 't')
-		stack  = sortp ->cstack;
-	else if (stack == 'o' && sortp->cstack == 'a')
-		stack = 'b';
-	else if (stack == 'o' && sortp->cstack == 'b')
-		stack = 'a';
-	else if (!(stack == 'a') || !(stack == 'b'))
-		return ;
+		stack = sortp ->cstack;
+	else if (stack == 'o')
+		stack = lane_swich(sortp->cstack);
 	if (!ft_strncmp(temp, "p", 2))
-	{
-		if (stack == 'a')
-			stack = 'b';
-		else if
-			(stack == 'b')
-			stack = 'a';
-		ft_strlcat(temp, &stack, 3);
-	}
-	if (!ft_strncmp(temp, "r", 2) || !ft_strncmp(temp,"s",2))
+		stack = lane_swich(stack);
+	if (!ft_strncmp(temp, "r", 2) || !ft_strncmp(temp, "s", 2) || \
+			!ft_strncmp(temp, "p", 2))
 		ft_strlcat(temp, &stack, 3);
 	if (!ft_strncmp(temp, "u", 2))
+		movement(sortp, lane_swich(stack), "p");
+	if (!ft_strncmp(temp, "rr", 3))
 	{
-		ft_strlcpy(temp, "p", 3);
-		ft_strlcat(temp, &stack, 3);
-	}
-	if (!ft_strncmp(temp, "rr", 3) ){
-		if (!ft_strncmp(temp,"rr2",4))
-			ft_strlcpy(temp,"rrr",4);
+		if (!ft_strncmp(temp, "rr2", 4))
+			ft_strlcpy(temp, "rrr", 4);
 		else
 			ft_strlcat(temp, &stack, 4);
 	}
-	if (!ft_strncmp(temp,"r2",3))
-		ft_strlcpy(temp,"rr",3);
+	if (!ft_strncmp(temp, "r2", 3))
+		ft_strlcpy(temp, "rr", 3);
 	movement_orchestrator(sortp->game, temp);
 }

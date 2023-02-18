@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 03:16:05 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/16 15:17:56 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/18 00:38:10 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ int	ft_lstgn_size(t_game_node *node)
 
 void	ft_lstgn_clear(t_game_node *node)
 {
-	t_game_node *next;
+	t_game_node	*next;
 
-	while(node != 0)
+	while (node != 0)
 	{
-			next = node->next;
-			free(node);
-			node = next;
+		next = node->next;
+		free(node);
+		node = next;
 	}
 }
