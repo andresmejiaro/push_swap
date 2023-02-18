@@ -6,7 +6,7 @@
 #    By: amejia <amejia@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 14:12:43 by amejia            #+#    #+#              #
-#    Updated: 2023/02/18 01:27:25 by amejia           ###   ########.fr        #
+#    Updated: 2023/02/18 03:34:18 by amejia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME_DEBUG = push_swap_debug
 
 SRCS =  game_global_manip_game_structures2.c game_movements_push.c \
 game_movements_swap.c main.c game_movements_reverse_rotate.c \
-list_game_node_fcts.c movement_orchestrator.c \
+list_game_node_fcts.c movement_orchestrator.c quicksort2.c\
 sort.c game_global_manip_game_structures.c game_movements_rotate.c \
 list_game_node_fcts2.c quicksort.c statistics.c insertion.c radix.c
 
