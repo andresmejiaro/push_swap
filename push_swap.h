@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:54:00 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/18 02:52:58 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/20 01:43:54 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,13 @@ int				l_comparison(t_sort_params *sortp, char stack, \
 long			*list_quantiles_long(long *list, size_t len);
 void			list_qsort(long *list, size_t len);
 long			*count_quantiles_long(long *list, size_t len);
+void			sort(t_sort_params *sortp);
 void			sort_quicksort_align(t_sort_params *sortp);
 void			sort_quicksort(t_sort_params *sortp);
 void			sort_insertionsort(t_sort_params *sortp);
 void			sort_radix(t_sort_params *sortp);
-
+void			sort_insertionsort2(t_sort_params *sortp);
+void			sort_cyclesort(t_sort_params *sortp);
+int				check_sorted(t_sort_params *sortp);
+void			list_qsort_int(int *list, size_t len);
 #endif

@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:40:27 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/18 02:52:41 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/20 01:49:31 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,3 +98,31 @@ long	*count_quantiles_long(long *list, size_t len)
 	free(result);
 	return (result_count);
 }
+
+void	list_qsort_int(int *list, size_t len)
+{
+	size_t	head;
+	size_t	orlen;
+
+	if (len <= 1)
+		return ;
+	orlen = len;
+	head = 1;
+	len = len -1;
+	while (len - head >= 1)
+	{
+		if (list[len] < list[0])
+		{
+			ft_value_swap_i(list + len, list + head);
+			head++;
+		}
+		else
+			len--;
+	}
+	while (list[head] > list[0])
+		head--;
+	ft_value_swap_i(list, list + head);
+	list_qsort_int(list, head);
+	list_qsort_int(list + head + 1, orlen - head - 1);
+}
+

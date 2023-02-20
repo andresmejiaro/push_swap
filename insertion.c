@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 06:52:27 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/18 00:36:54 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/19 21:45:24 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,41 @@ void	sort_insertionsort(t_sort_params *sortp)
 	counter = 0;
 	while (counter < sortp->elements)
 	{
-		if (counter != 0)
+		if (sortp->ascending > 0)
 			get_over_here(sortp, sorted_list[counter]);
 		else
-			move_to(sortp, 't', find_value(sortp, 't', \
-				sorted_list[counter]));
+			get_over_here(sortp, \
+				sorted_list[sortp->elements - counter - 1]);
 		move_to(sortp, 't', 1);
 		counter++;
 	}
+	if (sortp->ascending > 0)
+		move_to(sortp, 't', find_value(sortp, 't', sorted_list[0]));
+	else
+		move_to(sortp, 't', find_value(sortp, 't', sorted_list[sortp->elements - 1]));
+	free(sorted_list);
+}
+
+void	sort_insertionsort2(t_sort_params *sortp)
+{
+	long	*sorted_list;
+	int		counter;
+
+	sorted_list = list_from_params(sortp);
+	list_qsort(sorted_list, sortp->elements);
+	counter = 0;
+	while (counter < sortp->elements)
+	{
+		if (sortp->ascending > 0)
+			move_to(sortp, 't', find_value(sortp, 't', sorted_list[counter]));
+		else
+			move_to(sortp, 't', find_value(sortp, 't', sorted_list[sortp->elements - counter - 1]));
+		if (counter != sortp->elements -1)
+			movement(sortp, 't', "p");
+		counter++;
+	}
+	counter--;
+	while(counter-- > 0)
+		movement(sortp, 't', "u");
 	free(sorted_list);
 }

@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 07:40:51 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/18 01:49:47 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/19 17:21:36 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	sort_radix(t_sort_params *sortp)
 	int	valor;
 
 	counter[0] = 0;
-	counter[3] = 7;
+	counter[3] = pseudologbase(sortp->elements, 2);
 	while (counter[3]--)
 	{
 		counter[1] = radix_precount(sortp, counter[0]);
