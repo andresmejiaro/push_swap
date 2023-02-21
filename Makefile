@@ -6,7 +6,7 @@
 #    By: amejia <amejia@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 14:12:43 by amejia            #+#    #+#              #
-#    Updated: 2023/02/19 23:13:26 by amejia           ###   ########.fr        #
+#    Updated: 2023/02/21 00:32:22 by amejia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,9 @@ NAME_DEB = push_swap_deb
 
 SRCS =  game_global_manip_game_structures2.c game_movements_push.c \
 game_movements_swap.c main.c game_movements_reverse_rotate.c \
-list_game_node_fcts.c movement_orchestrator.c quicksort2.c\
+list_game_node_fcts.c movement_orchestrator.c \
 sort.c game_global_manip_game_structures.c game_movements_rotate.c \
-list_game_node_fcts2.c quicksort.c statistics.c insertion.c radix.c \
-cyclesort.c
+list_game_node_fcts2.c  statistics.c insertion.c radixb.c 
 
 OBJS = ${SRCS:.c=.o}
 

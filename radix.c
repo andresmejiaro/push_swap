@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 07:40:51 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/19 17:21:36 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/20 18:26:20 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	radix_precount(t_sort_params *sortp, int prof)
 			counter[1]++;
 		counter[0]++;
 	}
+	free (list);
 	return (counter[1]);
 }
 
