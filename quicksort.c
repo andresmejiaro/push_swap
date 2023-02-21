@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:44:05 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/19 21:36:37 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/21 14:47:22 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	sort_quicksort_subsorts(t_sort_params *sortp, int *coords, int npush)
 		sub_par[counter]->game = sortp->game;
 		if (counter == 1)
 			move_to(sortp, 'o', find_value(sortp, 'o', set_back));
-		sort(sub_par[counter]);
+		sort_quicksort(sub_par[counter]);
 		free(sub_par[counter]);
 	}
 	free(sub_par);
