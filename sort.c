@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 19:33:38 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/20 17:49:33 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/21 17:33:50 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,8 @@ void	sort(t_sort_params *sortp)
 {
 	if (check_sorted(sortp))
 		return ;
-	sort_radix(sortp);
+	if (sortp->elements <= 3)
+		sort_cyclesort(sortp);
+	else
+		sort_radix(sortp);
 }
