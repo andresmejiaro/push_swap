@@ -6,7 +6,7 @@
 #    By: amejia <amejia@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 14:12:43 by amejia            #+#    #+#              #
-#    Updated: 2023/02/21 00:32:22 by amejia           ###   ########.fr        #
+#    Updated: 2023/02/22 04:02:55 by amejia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRCS =  game_global_manip_game_structures2.c game_movements_push.c \
 game_movements_swap.c main.c game_movements_reverse_rotate.c \
 list_game_node_fcts.c movement_orchestrator.c \
 sort.c game_global_manip_game_structures.c game_movements_rotate.c \
-list_game_node_fcts2.c  statistics.c insertion.c radixb.c 
+list_game_node_fcts2.c  statistics.c insertion.c radixb.c cyclesort.c
 
 OBJS = ${SRCS:.c=.o}
 

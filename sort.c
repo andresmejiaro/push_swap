@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 19:33:38 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/21 17:33:50 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/22 05:31:58 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int	check_sorted(t_sort_params *sortp)
 	{
 		if (sortp->ascending == 1 && (get_node(sortp, 't', sortp->start + \
 			ct)->content != sorted_list[ct]))
-			return (0);
+			return (free(sorted_list), 0);
 		if (sortp->ascending == -1 && (get_node(sortp,'t',sortp->start + ct)->\
 			content != sorted_list[sortp->elements-ct-1]))
-			return (0);
+			return (free(sorted_list), 0);
 		ct++;
 	}
 	free(sorted_list);
@@ -78,4 +78,5 @@ void	sort(t_sort_params *sortp)
 		sort_cyclesort(sortp);
 	else
 		sort_radix(sortp);
+
 }

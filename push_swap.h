@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:54:00 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/20 01:43:54 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/22 04:46:28 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,6 @@ void			sort_insertionsort2(t_sort_params *sortp);
 void			sort_cyclesort(t_sort_params *sortp);
 int				check_sorted(t_sort_params *sortp);
 void			list_qsort_int(int *list, size_t len);
+void	movement2(t_sort_params *sortp, char stack, char *mv);
+
 #endif
