@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:54:00 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/22 04:46:28 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/22 08:25:22 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void			print_game_state(t_game *game);
 char			lane_swich(char c);
 t_sort_params	*sort_params(char cstack, int start, int end, \
 				int ascending);
-long			*node_to_list(t_game *game, t_sort_params *sortp);
 long			*list_from_params(t_sort_params *sortp);
 long			*list_from_paramso(t_sort_params *sortp);
 void			fill_order(t_sort_params *sortp);
@@ -93,14 +92,31 @@ long			*list_quantiles_long(long *list, size_t len);
 void			list_qsort(long *list, size_t len);
 long			*count_quantiles_long(long *list, size_t len);
 void			sort(t_sort_params *sortp);
-void			sort_quicksort_align(t_sort_params *sortp);
-void			sort_quicksort(t_sort_params *sortp);
-void			sort_insertionsort(t_sort_params *sortp);
 void			sort_radix(t_sort_params *sortp);
-void			sort_insertionsort2(t_sort_params *sortp);
 void			sort_cyclesort(t_sort_params *sortp);
+void			sort_quicksort(t_sort_params *sortp);
+void			sort_quicksort_align(t_sort_params *sortp);
 int				check_sorted(t_sort_params *sortp);
 void			list_qsort_int(int *list, size_t len);
-void	movement2(t_sort_params *sortp, char stack, char *mv);
+void			movement2(t_sort_params *sortp, char stack, char *mv);
+int				*optimal_starting_p(t_sort_params *sortp);
+int				check_in_cicles(int **cicles, int value);
+void			free_cicles(int **cicles);
+void			cycle_solve_loop_sub(t_sort_params *sortp, int *position, \
+					int *distance);
+void			cycle_solve_loop(t_sort_params *sortp, int *position, \
+					int *distance);
+void			cycle_solve(t_sort_params *sortp, int *opt_p);
+int				*radix_precount(t_sort_params *sortp, int prof);
+void			radix_subloop_a(t_sort_params *sortp, int *precount, int valor, \
+					long *rst);
+void			radix_subloop(t_sort_params *sortp, int *precount, int valor, \
+					long *rst);
+void			radix_subloop2(t_sort_params *sortp, \
+					int *precount, int valor, long *reset);
+void			radix_bounce(t_sort_params *sortp, int *precount2);
+void			graceful_malloc_fail(void *ptr);
+void	sort_insertionsort(t_sort_params *sortp);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/18 00:32:36 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/22 07:37:39 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	fill_order(t_sort_params *sortp)
 	int		counter2;
 
 	elementlist = list_from_params(sortp);
+	graceful_malloc_fail(elementlist);
 	list_qsort(elementlist, sortp->elements);
 	counter = 0;
 	while (counter < sortp->elements)
@@ -98,4 +99,21 @@ long	*list_from_paramso(t_sort_params *sortp)
 		counter++;
 	}
 	return (to_return);
+}
+
+int	find_value(t_sort_params *sortp, char this, long value)
+{
+	t_game_node	*node;
+	int			counter;
+
+	node = get_node(sortp, this, 0);
+	counter = 0;
+	while (node != 0)
+	{
+		if (node->content == value)
+			return (counter);
+		node = node->next;
+		counter++;
+	}
+	return (-1);
 }

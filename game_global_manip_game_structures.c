@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/21 14:16:03 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/22 16:59:15 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ long	*list_from_params(t_sort_params *sortp)
 {
 	int		counter;
 	long	*to_return;
-
+	
+	if (sortp->elements <= 0)
+		return (0);
 	counter = 0;
 	to_return = (long *)ft_calloc(sortp->elements, sizeof(long));
 	while (counter < sortp->elements)

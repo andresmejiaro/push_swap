@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:40:27 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/20 01:49:31 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/22 07:40:49 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ long	*list_quantiles_long(long *list, size_t len)
 	long	*result;
 
 	result = (long *)ft_calloc(3, sizeof(long));
+	graceful_malloc_fail(result);
 	list_qsort(list, len);
 	result[0] = list[len / 4];
 	result[1] = list[len / 2];
@@ -79,6 +80,7 @@ long	*count_quantiles_long(long *list, size_t len)
 	long	*result_count;
 
 	result = (long *)ft_calloc(3, sizeof(long));
+	graceful_malloc_fail(result);
 	list_qsort(list, len);
 	result[0] = list[len / 4];
 	result[1] = list[len / 2];
@@ -125,4 +127,3 @@ void	list_qsort_int(int *list, size_t len)
 	list_qsort_int(list, head);
 	list_qsort_int(list + head + 1, orlen - head - 1);
 }
-

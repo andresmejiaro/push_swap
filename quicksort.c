@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 18:44:05 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/21 14:47:22 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/22 13:53:13 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	sort_quicksort_loop(t_sort_params *sortp, long *w_piv, int *npush, \
 		if (!l_comparison(sortp, 't', w_piv[0]))
 			movement(sortp, 'o', "r2");
 		else
-			move_to(sortp, 'o', 1);
+			movement2(sortp, 'o', "r");
 		coords[1]--;
 	}
 	else if (l_comparison(sortp, 't', w_piv[0]))
@@ -34,7 +34,7 @@ int	sort_quicksort_loop(t_sort_params *sortp, long *w_piv, int *npush, \
 	}
 	else if (*npush < w_piv[2])
 	{
-		movement(sortp, 't', "r");
+		movement2(sortp, 't', "r");
 		coords[0]--;
 	}
 	else if (npush[1]++ > 0)
@@ -75,10 +75,9 @@ void	sort_quicksort_initialize(long **sorted_list, long *w_piv, int *coords, \
 void	sort_quicksort_subsorts(t_sort_params *sortp, int *coords, int npush)
 {
 	int				counter;
-	t_sort_params	**sub_par;
-	int 			set_back;
+	t_sort_params	*sub_par[3];
+	int				set_back;
 
-	sub_par = (t_sort_params **)ft_calloc(2, sizeof(t_sort_params *));
 	sub_par[0] = sort_params(sortp->cstack, coords[0], sortp->elements - npush \
 		+ coords[0] -1, sortp->ascending);
 	sub_par[1] = sort_params(lane_swich(sortp->cstack), 0, \
@@ -95,12 +94,11 @@ void	sort_quicksort_subsorts(t_sort_params *sortp, int *coords, int npush)
 		sort_quicksort(sub_par[counter]);
 		free(sub_par[counter]);
 	}
-	free(sub_par);
 }
 
 void	sort_quicksort_restore(t_sort_params *sortp, int npush, int *coords)
 {
-	move_to(sortp, 't', 0 * coords[0]);
+	move_to(sortp, 'o', 0*coords[1]);
 	while (npush-- > 0)
 		movement(sortp, 't', "u");
 }
@@ -112,17 +110,16 @@ void	sort_quicksort(t_sort_params *sortp)
 	int				np[3];
 	int				coords[2];
 
-	if (sortp->elements <= 1)
-		return ;
 	if (sortp->start != 0)
 	{
 		sort_quicksort_align(sortp);
 		return ;
 	}
-	if ((sortp->elements == 2) && (sortp->start == 0))
+	if (sortp->elements <= 1)
+		return ;
+	if ((sortp->elements <= 3) && (sortp->start == 0))
 	{
-		if (!l_comparison(sortp, 't', get_node(sortp, 't', 1)->content))
-			movement(sortp, 't', "s");
+		sort_insertionsort(sortp);
 		return ;
 	}
 	ft_bzero(np, 3 * sizeof(long));
