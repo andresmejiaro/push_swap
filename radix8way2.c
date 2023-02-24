@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   radix2.c                                           :+:      :+:    :+:   */
+/*   radix8way2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 06:45:38 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/23 16:09:15 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/23 23:10:38 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,16 @@ int	check_early_stop(t_sort_params *sortp)
 }
 
 
-void	sort_radix(t_sort_params *sortp)
+void	sort_radix8(t_sort_params *sortp)
 {
-	int		counter;
-	long	reset;
-	int		*precount[2];
+//	int		counter;
+//	long	reset;
+//	int		*precount[8];
 
 	counter = 0;
 	while (!check_sorted(sortp))
 	{
-		precount[0] = radix_precount(sortp, counter);
-		precount[1] = radix_precount(sortp, counter);
-		reset = -1;
-		while ((precount[0][0] || precount[0][1]))
-			radix_subloop(sortp, precount[0], counter, &reset);
-		move_to(sortp, 't', find_value(sortp, 't', reset));
-		reset = -1;
-		if (check_early_stop(sortp))
-		 	break;
-		 while (precount[0][2])
-			radix_subloop2(sortp, precount[0], counter, &reset);
-		move_to(sortp, 't', find_value(sortp, 't', reset));
-		radix_bounce(sortp, precount[1]);
-		counter += 2;
-		free(precount[0]);
-		free(precount[1]);
+		precount[0] = radix_precount8(sortp, counter);
+		precount[1] = radix_precount8(sortp, counter);
 	}
 }
