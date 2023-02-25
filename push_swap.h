@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:54:00 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/24 23:40:46 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/25 11:40:12 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,10 @@ void			sort_efficient2(t_sort_params *sortp);
 void			small_efficient_sort(t_sort_params *sortp);
 void			sort_ninsertionsort(t_sort_params *sortp);
 void 			sort_nquicksorta(t_sort_params *sortp);
+void			sort_ninsertionsort_otherside(t_sort_params *sortp);
+void 			sort_nquicksort_100(t_sort_params *sortp);
+void 			sort_nquicksorta_100(t_sort_params *sortp);
+
 
 
 

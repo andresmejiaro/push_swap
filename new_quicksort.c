@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:01:29 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/25 01:17:13 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/25 15:04:19 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,32 @@ void	value_choose_3_way(long *values, t_sort_params *sortp)
 	}
 	free(list);
 }
+
+
+void	value_choose_3_way_100(long *values, t_sort_params *sortp)
+{
+	long	*list;
+
+	list = list_from_params(sortp);
+	list_qsort(list, sortp->elements);
+	if (sortp->ascending == 1)
+	{
+		values[0] = list[0];
+		values[1] = list[1 * sortp->elements / 3];
+		values[2] = list[2 * sortp->elements / 3];
+		values[3] = list[sortp->elements - 1];
+	}
+	if (sortp->ascending == -1)
+	{
+		values[3] = list[0];
+		values[2] = list[1 * sortp->elements / 3];
+		values[1] = list[2 * sortp->elements / 3];
+		values[0] = list[sortp->elements - 1];
+	}
+	free(list);
+}	
+
+
 
 int	push3_way_process_u(t_sort_params *sortp, long *values, int *counts, int *counter)
 {
@@ -117,6 +143,49 @@ int	push3_way_method_chooser(t_sort_params *sortp)
 
 
 
+
+void	precount_boxes_assign(t_sort_params *sortp, long *list, long *result)
+{
+	if (sortp->ascending == 1)
+	{
+		result[0] = list[1 * sortp->elements / 3];
+		result[1] = list[2 * sortp->elements / 3];
+		result[2] = list[sortp->elements - 1];
+	}
+	if (sortp->ascending == -1)
+	{
+		result[2] = list[0];
+		result[1] = list[1 * sortp->elements / 3];
+		result[0] = list[2 * sortp->elements / 3];
+	}
+}
+
+int	*precount_boxes(t_sort_params *sortp)
+{
+	long	result[3];
+	int		*result_count;
+	long	*list;
+	int		ct[2];
+
+	list = list_from_params(sortp);
+	list_qsort(list, sortp->elements);
+	precount_boxes_assign(sortp, list, result);
+	result_count = (int *)ft_calloc(4, sizeof(size_t));
+	ct[0] = sortp->elements ;
+	ct[1] = sortp->ascending;
+	while (ct[0]-- > 0)
+	{
+		if (ct[1] * list[ct[0]] < ct[1] *result[0])
+			result_count[0]++;
+		else if (ct[1] * list[ct[0]] < ct[1] * result[1])
+			result_count[1]++;
+		else if (ct[1] * list[ct[0]] <= ct[1] * result[2])
+			result_count[2]++;
+	}
+	free(list);
+	return (result_count);
+}
+
 //divides  in three ways the "highest stays in this lane, the second highest 
 //to the positive part of the other stack and the lowest to the negative part"
 // of the other stack stays in the limit between the two in the "left lane of 
@@ -124,9 +193,10 @@ int	push3_way_method_chooser(t_sort_params *sortp)
 void	push3_way(t_sort_params *sortp, long *values, int *counts)
 {
 	int		counter;
+	int		*excounts;
 
 	counter = sortp->elements;
-
+	excounts = precount_boxes(sortp);
 	if (push3_way_method_chooser(sortp))
 	{	
 		move_to(sortp, 't', sortp->end);
@@ -136,11 +206,14 @@ void	push3_way(t_sort_params *sortp, long *values, int *counts)
 	}
 	else
 	{
-		move_to(sortp, 't',sortp->start);
-		while (counter-- > 0)
+		move_to(sortp, 't',sortp->start );
+		while (counter-- > 0 || (counts[0] + counts[1] < excounts[0] + \
+			excounts[1] && ft_lstgn_size(get_node(sortp, 't', 0)) < \
+			sortp->elements) )
 			if (push3_way_process_u(sortp, values, counts, &counter) == 0)
 				break ;	
 	}
+	free(excounts);
 }
 
 
@@ -164,6 +237,27 @@ void sort_nquicksort_subsorts(t_sort_params *sortp, int *counts)
 	free(sortp2);
 }
 
+void sort_nquicksort_subsorts_100(t_sort_params *sortp, int *counts)
+{
+	t_sort_params	*sortp2;
+	int				counter;
+	
+	sortp2 = sort_params(sortp->cstack, ft_min(-counts[0], -1), -1, sortp->ascending);
+	sortp2->game = sortp->game;
+	sort_ninsertionsort(sortp2);
+	free(sortp2);
+	counter = counts[1] ;
+	sortp2 = sort_params(lane_swich(sortp->cstack), 0, ft_max(counter -1, 0), sortp->ascending);
+	sortp2->game = sortp->game;
+	sort_ninsertionsort_otherside(sortp2);
+	free(sortp2);
+	counter = counts[2];
+	sortp2 = sort_params(lane_swich(sortp->cstack), 0, counts[2] - 1, sortp->ascending);
+	sortp2->game = sortp->game;
+	sort_ninsertionsort_otherside(sortp2);
+	free(sortp2);
+}
+
 void sort_nquicksort(t_sort_params *sortp)
 {
 	long			values[4];
@@ -182,4 +276,16 @@ void sort_nquicksort(t_sort_params *sortp)
 	return ;
 }
 
+void sort_nquicksort_100(t_sort_params *sortp)
+{
+	long			values[4];
+	int				counts[3];
+
+	ft_bzero(counts, 3 * sizeof(int));
+	value_choose_3_way(values, sortp);
+	push3_way(sortp, values, counts);
+	sort_nquicksort_subsorts_100(sortp, counts);
+	move_to(sortp, 't', find_value(sortp,'t',values[0]));
+	return ;
+}
 

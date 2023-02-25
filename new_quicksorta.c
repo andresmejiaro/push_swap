@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:01:29 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/25 01:23:01 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/25 12:07:18 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	value_choose_2_way(long *values, t_sort_params *sortp)
 	if (sortp->ascending == 1)
 	{
 		values[0] = list[0];
-		values[1] = list[1 * sortp->elements / 3];
+		values[1] = list[1 * sortp->elements / 2];
 		values[2] = list[sortp->elements - 1];
 	}
 	if (sortp->ascending == -1)
 	{
 		values[2] = list[0];
-		values[1] = list[1 * sortp->elements / 3];
+		values[1] = list[1 * sortp->elements / 2];
 		values[0] = list[sortp->elements - 1];
 	}
 	free(list);
@@ -126,7 +126,7 @@ void sort_nquicksorta(t_sort_params *sortp)
 	int				counts[3];
 
 
-	if (sortp->elements <= 50)
+	if (sortp->elements <= 27)
 	{
 		sort_ninsertionsort(sortp);
 		return ;
@@ -148,6 +148,26 @@ void sort_nquicksorta(t_sort_params *sortp)
 	{
 		movement(sortp, 'o', "p");
 	}
+	free(sortp2);
+	move_to(sortp,'t',find_value(sortp,'t',values[0]));
+}
+
+
+void sort_nquicksorta_100(t_sort_params *sortp)
+{
+	long			values[4];
+	t_sort_params	*sortp2;
+	int				counts[3];
+
+	ft_bzero(counts, 3 * sizeof(int));
+	value_choose_2_way(values, sortp);
+	push2_way(sortp, values, counts);
+	sortp2 = sort_params(sortp->cstack, ft_min(-counts[0], -1), -1, sortp->ascending);
+	sortp2->game = sortp->game;
+	sort_ninsertionsort(sortp2);
+	sortp2 = sort_params(lane_swich(sortp->cstack), 0, ft_max(counts[1] - 1, 0), sortp->ascending);
+	sortp2->game = sortp->game;
+	sort_ninsertionsort_otherside(sortp2);
 	free(sortp2);
 	move_to(sortp,'t',find_value(sortp,'t',values[0]));
 }
