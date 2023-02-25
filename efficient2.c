@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 02:00:12 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/24 04:34:23 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/24 15:33:42 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	sort_efficient3_ascending_cycle(t_sort_params *sortp, long *list)
 		movement(sortp, 't', "r");
 	}
 	else if(get_nodec(sortp,'t', 0) == list[1] && \
-		get_nodec(sortp,'t',1) == list[0])
+		get_nodec(sortp, 't',1) == list[0])
 		movement(sortp, 't',"s");
 	else if (get_nodec(sortp, 't', 0) == list[1] && \
 		get_nodec(sortp,'t',1) == list[2])
@@ -46,7 +46,6 @@ void	sort_efficient3_ascending_cycle(t_sort_params *sortp, long *list)
 		sort_efficient3_ascending_cycle_cont(sortp, list);
 	free(list);
 }
-
 
 void	small_efficient_sort(t_sort_params *sortp)
 {
@@ -65,7 +64,7 @@ void	small_efficient_sort(t_sort_params *sortp)
 	else if (sortp->elements == 3 && sortp->ascending == -1)
 		sort_efficient3_descending(sortp, values);
 	else
-		sort_quicksort(sortp);
+		sort_insertionsort(sortp);
 	return ;
 }
 

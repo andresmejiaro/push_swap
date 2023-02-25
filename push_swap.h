@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:54:00 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/24 04:33:36 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/24 23:40:46 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 # endif
 # ifndef DEBUG
 #  define DEBUG 0
-# endif
-# ifndef PLAY
-#  define PLAY 0
 # endif
 
 typedef struct s_game_node
@@ -120,15 +117,16 @@ void			radix_subloop2(t_sort_params *sortp, \
 void			radix_bounce(t_sort_params *sortp, int *precount2);
 void			graceful_malloc_fail(void *ptr);
 void			sort_insertionsort(t_sort_params *sortp);
-void			play(void);
 void			sort_nquicksort(t_sort_params *sortp);
 void			sort_radix8(t_sort_params *sortp);
 long			get_nodec(t_sort_params *sortp, char stack, int position);
 int				get_nodep(t_sort_params *sortp, char stack, int position);
 void			sort_efficient3_ascending(t_sort_params *sortp, long *list);
- void	sort_efficient3_descending(t_sort_params *sortp, long *list);
-void sort_efficient2(t_sort_params *sortp);
-void small_efficient_sort(t_sort_params *sortp);
+void			sort_efficient3_descending(t_sort_params *sortp, long *list);
+void			sort_efficient2(t_sort_params *sortp);
+void			small_efficient_sort(t_sort_params *sortp);
+void			sort_ninsertionsort(t_sort_params *sortp);
+void 			sort_nquicksorta(t_sort_params *sortp);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/22 22:50:56 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/24 20:17:48 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ void	game_start(t_game_node *data)
 	params = sort_params('a', 0, ft_lstgn_size((&game)->stack_a) - 1, 1);
 	params->game = &game;
 	fill_order(params);
-	if (PLAY != 1)
-		sort(params);
-	else
-		play();
+	sort(params);
 	if (DEBUG == 1)
 		print_game_state(&game);
 	free(params);

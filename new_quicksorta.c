@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:01:29 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/24 03:01:43 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/25 01:23:01 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	value_choose_2_way(long *values, t_sort_params *sortp)
 	if (sortp->ascending == 1)
 	{
 		values[0] = list[0];
-		values[1] = list[sortp->elements / 2];
+		values[1] = list[1 * sortp->elements / 3];
 		values[2] = list[sortp->elements - 1];
 	}
 	if (sortp->ascending == -1)
 	{
 		values[2] = list[0];
-		values[1] = list[sortp->elements / 2];
+		values[1] = list[1 * sortp->elements / 3];
 		values[0] = list[sortp->elements - 1];
 	}
 	free(list);
@@ -119,16 +119,16 @@ void	push2_way(t_sort_params *sortp, long *values, int *counts)
 }
 
 
-void sort_nquicksort(t_sort_params *sortp)
+void sort_nquicksorta(t_sort_params *sortp)
 {
 	long			values[4];
 	t_sort_params	*sortp2;
 	int				counts[3];
 
 
-	if (sortp->elements <= 3 && sortp->ascending == 1)
+	if (sortp->elements <= 50)
 	{
-		sort_efficient3_ascending(sortp);
+		sort_ninsertionsort(sortp);
 		return ;
 	}
 	ft_bzero(counts, 3 * sizeof(int));
@@ -136,12 +136,10 @@ void sort_nquicksort(t_sort_params *sortp)
 	push2_way(sortp, values, counts);
 	sortp2 = sort_params(sortp->cstack, ft_min(-counts[0], -1), -1, sortp->ascending);
 	sortp2->game = sortp->game;
-	sort_nquicksort(sortp2);
-	
-
+	sort_nquicksorta(sortp2);
 	sortp2 = sort_params(lane_swich(sortp->cstack), 0, ft_max(counts[1] - 1, 0), -sortp->ascending);
 	sortp2->game = sortp->game;
-	sort_nquicksort(sortp2);
+	sort_nquicksorta(sortp2);
 	while (sortp2->elements -- > 0)
 	{
 		movement(sortp, 'o', "p");
@@ -152,12 +150,4 @@ void sort_nquicksort(t_sort_params *sortp)
 	}
 	free(sortp2);
 	move_to(sortp,'t',find_value(sortp,'t',values[0]));
-	return ;
-}
-
-
-void play()
-{
-	ft_printf("%d\n",4/3);
-	ft_printf("%d\n",4*2/3);	
 }
