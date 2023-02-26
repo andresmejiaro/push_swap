@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/25 14:33:56 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/26 15:58:09 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_game_node	*get_node(t_sort_params *sortp, char stack, int position)
 		stack = 'b';
 	else if (stack == 'o' && sortp->cstack == 'b')
 		stack = 'a';
-	else if (!(stack == 'a') || !(stack == 'b'))
+	else if (!(stack == 'a' || stack == 'b'))
 		return (0);
 	if (stack == 'a')
 		node = sortp->game->stack_a;

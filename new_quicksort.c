@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:01:29 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/26 00:02:17 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/26 20:41:13 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,7 +263,7 @@ void sort_nquicksort(t_sort_params *sortp)
 	long			values[4];
 	int				counts[3];
 
-	if (sortp->elements <= 40)
+	if (sortp->elements <= 10)
 	{
 		sort_ninsertionsort(sortp);
 		return ;
