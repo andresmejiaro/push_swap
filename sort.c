@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 19:33:38 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/25 13:35:00 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/26 21:42:50 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_sort_params	*sort_params(char cstack, int start, int end, int ascending)
 		params->start = end;
 	}
 	params->elements = params->end - params->start + 1;
+	params->skip = 0;
 	return (params);
 }
 
@@ -73,8 +74,35 @@ int	check_sorted(t_sort_params *sortp)
 
 void	sort(t_sort_params *sortp)
 {
+	long *list;
+
+	list = 0;
 	if (check_sorted(sortp))
 		return ;
+	if (sortp->elements <=3)
+		sort_efficient3_ascending_cycle(sortp, list);
+	if (sortp->elements < 40)
+	{
+		sortp->skip = 1;
+		sort_nquicksort(sortp);
+	}
 	else
 		sort_nquicksort(sortp);
+}
+
+void sort_smallchooser(t_sort_params *sortp)
+{
+	long values[6];
+
+	if (sortp->elements > 3)
+		sort_nquicksort(sortp);
+	else if (sortp->elements == 2)
+		sort_efficient2(sortp);
+	else if (sortp->elements == 3 && get_node(sortp,'t',0) == get_node(sortp,'t',3) && sortp->ascending == 1)
+		sort_efficient3_ascending_cycle(sortp, values);
+	else if (sortp->elements == 3 && sortp->ascending == 1)
+			sort_efficient3_ascending(sortp, values);
+	else if (sortp->elements == 3 && sortp->ascending == -1)
+			sort_efficient3_descending(sortp, values);
+	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 22:01:29 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/26 20:41:13 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/26 22:48:47 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,9 +224,11 @@ void sort_nquicksort_subsorts(t_sort_params *sortp, int *counts)
 	sortp2 = sort_params(sortp->cstack, ft_min(-counts[0], -1), -1, sortp->ascending);
 	sortp2->game = sortp->game;
 	sort_nquicksort(sortp2);
+	free(sortp2);
 	sortp2 = sort_params(lane_swich(sortp->cstack), 0, ft_max(counts[1] - 1, 0), -sortp->ascending);
 	sortp2->game = sortp->game;
 	sort_nquicksort(sortp2);
+	free(sortp2);
 	while (sortp2->elements -- > 0)
 		movement(sortp, 'o', "p");
 	sortp2 = sort_params(lane_swich(sortp->cstack), -1, -counts[2], -sortp->ascending);
@@ -263,11 +265,18 @@ void sort_nquicksort(t_sort_params *sortp)
 	long			values[4];
 	int				counts[3];
 
-	if (sortp->elements <= 10)
+
+	if(sortp-> elements <= 3)
+	{
+		sort_smallchooser(sortp);
+		return ;
+	}
+	if (sortp->elements <= 30 && sortp->skip != 1)
 	{
 		sort_ninsertionsort(sortp);
 		return ;
 	}
+	sortp->skip = 0;	
 	ft_bzero(counts, 3 * sizeof(int));
 	value_choose_3_way(values, sortp);
 	push3_way(sortp, values, counts);
