@@ -131,5 +131,4 @@ void 			sort_nquicksorta(t_sort_params *sortp);
 void			sort_efficient3_ascending_cycle(t_sort_params *sortp, long *list);
 void sort_smallchooser(t_sort_params *sortp);
 
-
 #endif

@@ -6,7 +6,7 @@
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:54:32 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/24 23:02:53 by amejia           ###   ########.fr       */
+/*   Updated: 2023/02/25 14:14:16 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,12 @@ void	movement(t_sort_params *sortp, char stack, char *mv)
 
 void	movement2(t_sort_params *sortp, char stack, char *mv)
 {
-	char		temp[10];
 
-	if (stack == 't')
-		stack = sortp ->cstack;
-	else if (stack == 'o')
-		stack = lane_swich(sortp->cstack);
-	if (!ft_strncmp(temp, "r", 2) && \
-		(ft_lstgn_size(get_node(sortp, stack, 0)) == 0))
+		if (!ft_strncmp(mv, "r", 2) && \
+		(ft_lstgn_size(get_node(sortp, stack, 0)) <= 1))
 		return ;
-	if (!ft_strncmp(temp, "rr", 3) && ft_strncmp(temp, "rr2", 4) && \
-		(ft_lstgn_size(get_node(sortp, stack, 0)) == 0))
+	if (!ft_strncmp(mv, "rr", 3) && ft_strncmp(mv, "rr2", 4) && \
+		(ft_lstgn_size(get_node(sortp, stack, 0)) <= 1))
 		return ;
 	movement(sortp, stack, mv);
 }

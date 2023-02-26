@@ -6,7 +6,7 @@
 #    By: amejia <amejia@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/14 14:12:43 by amejia            #+#    #+#              #
-#    Updated: 2023/02/24 23:39:32 by amejia           ###   ########.fr        #
+#    Updated: 2023/02/25 11:21:24 by amejia           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ sort.c game_global_manip_game_structures.c game_movements_rotate.c \
 list_game_node_fcts2.c  statistics.c radix.c cyclesort.c cyclesort2.c \
 radix2.c graceful_malloc_fail.c  quicksort.c quicksort2.c insertionsort.c \
 new_quicksort.c game_global_manip_game_structures3.c efficient.c efficient2.c \
-efficient3.c new_insertionsort.c new_quicksorta.c
+efficient3.c new_insertionsort.c new_quicksorta.c new_insertionsort2.c
 
 OBJS = ${SRCS:.c=.o}
 
