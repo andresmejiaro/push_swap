@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movement_orchestrator.c                            :+:      :+:    :+:   */
+/*   movement_orchestrator_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 18:54:32 by amejia            #+#    #+#             */
-/*   Updated: 2023/03/12 01:08:09 by amejia           ###   ########.fr       */
+/*   Updated: 2023/03/12 01:07:47 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 void	move_orchestrator_print(t_game *game, char *mv)
 {
@@ -82,4 +82,33 @@ void	movement2(t_sort_params *sortp, char stack, char *mv)
 		(ft_lstgn_size(get_node(sortp, stack, 0)) <= 1))
 		return ;
 	movement(sortp, stack, mv);
+}
+
+int	movement_orchestrator_2(t_game *game, char *mv)
+{
+	if (!ft_strncmp(mv, "pb", -1))
+		pb(game);
+	else if (!ft_strncmp(mv, "pa", -1))
+		pa(game);
+	else if (!ft_strncmp(mv, "sa", -1))
+		sa(game);
+	else if (!ft_strncmp(mv, "sb", -1))
+		sb(game);
+	else if (!ft_strncmp(mv, "ss", -1))
+		ss(game);
+	else if (!ft_strncmp(mv, "rb", -1))
+		rb(game);
+	else if (!ft_strncmp(mv, "ra", -1))
+		ra(game);
+	else if (!ft_strncmp(mv, "rr", -1))
+		rr(game);
+	else if (!ft_strncmp(mv, "rra", -1))
+		rra(game);
+	else if (!ft_strncmp(mv, "rrb", -1))
+		rrb(game);
+	else if (!ft_strncmp(mv, "rrr", -1))
+		rrr(game);
+	else
+		return (-1);
+	return (0);
 }

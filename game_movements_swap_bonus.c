@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_movements_swap.c                              :+:      :+:    :+:   */
+/*   game_movements_swap_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 15:43:35 by amejia            #+#    #+#             */
-/*   Updated: 2023/03/11 23:15:14 by amejia           ###   ########.fr       */
+/*   Updated: 2023/03/11 23:15:39 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 t_game_node	*swap(t_game_node *first)
 {

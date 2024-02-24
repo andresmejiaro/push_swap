@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quicksort2.c                                       :+:      :+:    :+:   */
+/*   graceful_malloc_fail_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 02:23:28 by amejia            #+#    #+#             */
-/*   Updated: 2023/02/22 08:03:38 by amejia           ###   ########.fr       */
+/*   Created: 2023/02/22 07:28:53 by amejia            #+#    #+#             */
+/*   Updated: 2023/03/11 23:24:37 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/libft.h"
+#include "push_swap_bonus.h"
 
-void	sort_quicksort_align(t_sort_params *sortp)
+void	graceful_malloc_fail(void *ptr)
 {
-	t_sort_params	*sort2;
-
-	if (sortp->elements != ft_lstgn_size(get_node(sortp,'t',0)))
-		move_to(sortp, 't', sortp->start);
-	sort2 = sort_params(sortp->cstack, 0, sortp->elements - 1, \
-		sortp->ascending);
-	sort2->game = sortp->game;
-	sort_quicksort(sort2);
-	free(sort2);
+	if (ptr == 0)
+		exit(0);
 }

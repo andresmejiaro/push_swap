@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 13:54:00 by amejia            #+#    #+#             */
-/*   Updated: 2023/03/12 01:13:36 by amejia           ###   ########.fr       */
+/*   Updated: 2023/03/15 23:34:39 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
+#ifndef PUSH_SWAP_BONUS_H
 # include "libft/libft.h"
-# define PUSH_SWAP_H
+# define PUSH_SWAP_BONUS_H
 # ifndef SEED_N
 #  define SEED_N 658457
 # endif
@@ -68,17 +68,9 @@ char			lane_swich(char c);
 t_sort_params	*sort_params(char cstack, int start, int end, \
 				int ascending);
 long			*list_from_params(t_sort_params *sortp);
-long			*list_from_paramso(t_sort_params *sortp);
-void			fill_order(t_sort_params *sortp);
 t_game_node		*get_node(t_sort_params *sortp, char stack, \
 				int position);
-void			movement_orchestrator(t_game *game, char *mv);
 int				movement_orchestrator_2(t_game *game, char *mv);
-void			movement(t_sort_params *sortp, char stack, char *mv);
-void			move_to(t_sort_params *sortp, char this, \
-					int position);
-int				find_value(t_sort_params *sortp, char this, \
-					long value);
 void			sa(t_game *game);
 void			sb(t_game *game);
 void			ss(t_game *game);
@@ -90,39 +82,12 @@ void			rr(t_game *game);
 void			rra(t_game *game);
 void			rrb(t_game *game);
 void			rrr(t_game *game);
-int				l_comparison(t_sort_params *sortp, char stack, \
-					long value);
 long			*list_quantiles_long(long *list, size_t len);
 void			list_qsort(long *list, size_t len);
-void			sort(t_sort_params *sortp);
 int				check_sorted(t_sort_params *sortp);
-void			list_qsort_int(int *list, size_t len);
-void			movement2(t_sort_params *sortp, char stack, char *mv);
 void			graceful_malloc_fail(void *ptr);
-void			sort_insertionsort(t_sort_params *sortp);
-void			sort_nquicksort(t_sort_params *sortp);
-long			get_nodec(t_sort_params *sortp, char stack, int position);
-int				get_nodep(t_sort_params *sortp, char stack, int position);
-void			sort_efficient3_ascending(t_sort_params *sortp, long *list);
-void			sort_efficient3_descending(t_sort_params *sortp, long *list);
-void			sort_efficient2(t_sort_params *sortp);
-void			small_efficient_sort(t_sort_params *sortp);
-void			sort_ninsertionsort(t_sort_params *sortp);
-void			sort_efficient3_ascending_cycle(t_sort_params *sortp, \
-					long *list);
-void			sort_smallchooser(t_sort_params *sortp);
-void			sort_ninsertionsort_fill_upstairs(t_sort_params *sortp, \
-					int *counter, int *position, long *list);
-void			sort_ninsertionsort_bring_it_down_ex(t_sort_params *sortp, \
-				int *counter, int *position);
-void			push_places_2(t_sort_params *sortp, int from, int to);
-int				sort_ninsertionsort_realcount(t_sort_params *sortp, \
-					int from, int to);
-void			sort_ninsertionsort_put_in_place(t_sort_params *sortp, \
-					int from, int *position);
-void			push_places_2_way(int *fromb_tob, int *way);
-int				push3_way_process_u(t_sort_params *sortp, long *values, \
-					int *counts, int *counter);
-void			push3_way(t_sort_params *sortp, long *values, int *counts);
+void			checker(t_sort_params *sortp);
+void			fill_order(t_sort_params *sortp);
+void			movement(t_sort_params *sortp, char stack, char *mv);
 
 #endif

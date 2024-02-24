@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   sort_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andres <andres@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 19:33:38 by amejia            #+#    #+#             */
-/*   Updated: 2023/03/11 03:24:34 by andres           ###   ########.fr       */
+/*   Updated: 2023/03/12 01:11:20 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/libft.h"
+#include "push_swap_bonus.h"
 
 // this mallocs the result
 t_sort_params	*sort_params(char cstack, int start, int end, int ascending)
@@ -37,16 +36,6 @@ t_sort_params	*sort_params(char cstack, int start, int end, int ascending)
 	return (params);
 }
 
-int	l_comparison(t_sort_params *sortp, char stack, long value)
-{
-	if (get_node(sortp, stack, 0) == 0)
-		return (0);
-	if (sortp->ascending * get_node(sortp, stack, 0)->content < \
-		sortp->ascending * value)
-		return (1);
-	return (0);
-}
-
 int	check_sorted(t_sort_params *sortp)
 {
 	long	*sorted_list;
@@ -70,44 +59,4 @@ int	check_sorted(t_sort_params *sortp)
 	}
 	free(sorted_list);
 	return (1);
-}
-
-void	sort(t_sort_params *sortp)
-{
-	long	*list;
-
-	list = 0;
-	if (check_sorted(sortp))
-		return ;
-	if (sortp->elements <= 3)
-		sort_efficient3_ascending_cycle(sortp, list);
-	else if (sortp->elements < 12)
-	{
-		sortp->skip = 1;
-		sort_nquicksort(sortp);
-	}
-	else if (sortp->elements < 70)
-		sort_ninsertionsort(sortp);
-	else if (sortp->elements < 110)
-		sort_ninsertionsort(sortp);
-	else
-		sort_nquicksort(sortp);
-}
-
-void	sort_smallchooser(t_sort_params *sortp)
-{
-	long	values[6];
-
-	if (sortp->elements > 3)
-		sort_nquicksort(sortp);
-	else if (sortp->elements == 2)
-		sort_efficient2(sortp);
-	else if (sortp->elements == 3 && get_node(sortp, 't', 0) == \
-		get_node(sortp, 't', 3) && sortp->ascending == 1)
-		sort_efficient3_ascending_cycle(sortp, values);
-	else if (sortp->elements == 3 && sortp->ascending == 1)
-		sort_efficient3_ascending(sortp, values);
-	else if (sortp->elements == 3 && sortp->ascending == -1)
-		sort_efficient3_descending(sortp, values);
-	return ;
 }

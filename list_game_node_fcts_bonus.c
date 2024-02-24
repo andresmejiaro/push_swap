@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_game_node_fcts.c                              :+:      :+:    :+:   */
+/*   list_game_node_fcts_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andres <andres@student.42.fr>              +#+  +:+       +#+        */
+/*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:47:07 by amejia            #+#    #+#             */
-/*   Updated: 2023/03/11 02:47:07 by andres           ###   ########.fr       */
+/*   Updated: 2023/03/11 23:16:03 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "libft/libft.h"
+#include "push_swap_bonus.h"
 
 t_game_node	*ft_lstgn_new(int content)
 {

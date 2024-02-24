@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_game_node_fcts2.c                             :+:      :+:    :+:   */
+/*   list_game_node_fcts2_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 03:16:05 by amejia            #+#    #+#             */
-/*   Updated: 2023/03/11 23:16:18 by amejia           ###   ########.fr       */
+/*   Updated: 2023/03/11 23:16:38 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 //returns nnodes from the actual node, zero after the last one
 t_game_node	*ft_lstgn_nnode(t_game_node *node, int position)

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_global_manip_game_structures.c                :+:      :+:    :+:   */
+/*   game_global_manip_game_structures_bonus.c          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amejia <amejia@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:14:48 by amejia            #+#    #+#             */
-/*   Updated: 2023/03/11 23:13:40 by amejia           ###   ########.fr       */
+/*   Updated: 2023/03/11 23:13:28 by amejia           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 void	game_start(t_game_node *data)
 {
@@ -23,7 +23,7 @@ void	game_start(t_game_node *data)
 	params = sort_params('a', 0, ft_lstgn_size((&game)->stack_a) - 1, 1);
 	params->game = &game;
 	fill_order(params);
-	sort(params);
+	checker(params);
 	if (DEBUG == 1)
 		print_game_state(&game);
 	free(params);
